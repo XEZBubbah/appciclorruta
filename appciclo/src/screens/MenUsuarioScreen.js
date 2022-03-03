@@ -6,7 +6,7 @@ const  MenUsuarioScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView forceInset = {{ top: 'always'}}>
-            <Text style= {{ fontSize: 50 }}> Menú Usuario </Text>
+            <Text style= {{ fontSize: 40 }}> Menú Usuario </Text>
         </SafeAreaView>
     )
 }

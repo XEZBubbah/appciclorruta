@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, StyleSheet,Image, View, TextInput } from "react-native";
+import { Text, StyleSheet,Image, View, TextInput, Button, Alert } from "react-native";
 
 class LoginScreen extends Component {
     render(){
@@ -13,9 +13,25 @@ class LoginScreen extends Component {
                 <Text style= {{ fontSize: 35, marginTop: 30, fontWeight: 'bold'}}> Inicia Sesión </Text>
                 <Text style= {{ fontSize: 15, marginTop: 5, color: '#808080', fontStyle:"italic"}}> Inicia sesión para usar la app </Text>
                 <Text style= {{ marginTop: 20, marginLeft: 10}}>Correo Electronico</Text>
-                <TextInput autoComplete="email" style={styles.input}> </TextInput>
+                <TextInput keyboardType="email-address" style={styles.input}> </TextInput>
                 <Text style= {{ marginTop: 5, marginLeft: 10}}>Contraseña</Text>
-                <TextInput autoComplete="password" style={styles.input}> </TextInput>
+                <TextInput secureTextEntry= {true} style={styles.input}> </TextInput>
+                <Button
+                    title="Iniciar Sesión"
+                    onPress={() => Alert.alert('Button with adjusted color pressed')}
+                />
+                <Text 
+                    onPress={() => Alert.alert('Hola')}
+                    style= {{marginTop: 20, color: '#0000ff'}}
+                    color= '#0000ff'
+                >
+                    ¿Olvidaste la Contraseña? </Text>
+                <Text 
+                    onPress={() => Alert.alert('Chao')}
+                    style= {{marginTop: 5, color: '#0000ff'}}
+                    color= '#0000ff'
+                > 
+                    Crear Cuenta </Text>
             </View>
         )
     }

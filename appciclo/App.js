@@ -9,9 +9,9 @@ import LoginScreen from './src/screens/LoginScreen';
 
 const switchNavigator = createSwitchNavigator({
   mainFlow: createBottomTabNavigator({
+    LoginUsuario: LoginScreen,
     MapView: MapScreen,
     MenUsuario: MenUsuarioScreen,
-    LoginUsuario: LoginScreen
   })
 })
 

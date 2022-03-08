@@ -7,7 +7,7 @@ import Map from "../components/Map";
 const MapScreen = ({ navigation }) => {
     return (
         <SafeAreaView forceInset = {{ top: 'always'}}>
-            <Text style= {{ fontSize: 40 }}> Vista de Mapa </Text>
+            <Text style= {{ fontSize: 20 }}>  </Text>
             <Map />
         </SafeAreaView>
     )

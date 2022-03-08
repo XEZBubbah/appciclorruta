@@ -1,9 +1,8 @@
 import React from "react";
-import { SafeAreaView } from "react-navigation";
 import { Text, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-navigation";
 
-const  MenUsuarioScreen = ({ navigation }) => {
-
+const  LoginScreen = ({ navigation }) => {
     return (
         <SafeAreaView forceInset = {{ top: 'always'}}>
             <Text style= {{ fontSize: 30 }}>  </Text>
@@ -12,4 +11,4 @@ const  MenUsuarioScreen = ({ navigation }) => {
     )
 }
 
-export default  MenUsuarioScreen
+export default LoginScreen

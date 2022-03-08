@@ -5,11 +5,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import MapScreen from './src/screens/MapScreen';
 import MenUsuarioScreen from './src/screens/MenUsuarioScreen';
 import { setNavigator } from './src/navigationRef'; 
+import LoginScreen from './src/screens/LoginScreen';
 
 const switchNavigator = createSwitchNavigator({
   mainFlow: createBottomTabNavigator({
     MapView: MapScreen,
-    MenUsuario: MenUsuarioScreen
+    MenUsuario: MenUsuarioScreen,
+    LoginUsuario: LoginScreen
   })
 })
 

@@ -1,28 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import MapScreen from './src/screens/MapScreen';
-import MenUsuarioScreen from './src/screens/MenUsuarioScreen';
-import { setNavigator } from './src/navigationRef'; 
 import LoginScreen from './src/screens/LoginScreen';
+import CrearUsuaScreen from './src/screens/CrearUsuaScreen';
+import RecuperarContScreen from './src/screens/RecuperarContScreen';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const switchNavigator = createSwitchNavigator({
-  mainFlow: createBottomTabNavigator({
-    LoginUsuario: LoginScreen,
-    MapView: MapScreen,
-    MenUsuario: MenUsuarioScreen,
-  })
-})
+const Stack = createStackNavigator();
 
-const App = createAppContainer(switchNavigator)
-
-export default () => {
-  return (
-    <App
-      ref={navigator => {
-        setNavigator(navigator)
-      }}
-    />
-  );
+function App () {
+    return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName= "login">
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              name="Crear Usuario"
+              component={CrearUsuaScreen}
+            />
+            <Stack.Screen
+              name="Recuperar Contraseña"
+              component={RecuperarContScreen}
+            />
+            <Stack.Screen
+              name="Map View"
+              component={MapScreen}
+            /> 
+          </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
+
+export default App
+
+

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { Text, StyleSheet,Image, View, TextInput, Button, Alert } from "react-native";
 
-class LoginScreen extends Component {
-    render(){
+
+function LoginScreen ({navigation}) {
         return (
             <View style= {{padding: 50, marginTop: 30}}>
                 <Image 
@@ -15,26 +15,25 @@ class LoginScreen extends Component {
                 <Text style= {{ marginTop: 20, marginLeft: 10}}>Correo Electronico</Text>
                 <TextInput keyboardType="email-address" style={styles.input}> </TextInput>
                 <Text style= {{ marginTop: 5, marginLeft: 10}}>Contraseña</Text>
-                <TextInput secureTextEntry= {true} style={styles.input}> </TextInput>
+                <TextInput secureTextEntry= {true} style={styles.input}></TextInput>
                 <Button
                     title="Iniciar Sesión"
                     onPress={() => Alert.alert('Button with adjusted color pressed')}
                 />
                 <Text 
-                    onPress={() => Alert.alert('Hola')}
+                    onPress={() => navigation.navigate('Recuperar Contraseña')}
                     style= {{marginTop: 20, color: '#0000ff'}}
                     color= '#0000ff'
                 >
                     ¿Olvidaste la Contraseña? </Text>
                 <Text 
-                    onPress={() => Alert.alert('Chao')}
+                    onPress={() => navigation.navigate('Crear Usuario')}
                     style= {{marginTop: 5, color: '#0000ff'}}
                     color= '#0000ff'
                 > 
                     Crear Cuenta </Text>
             </View>
         )
-    }
 }
 
 const styles = StyleSheet.create({

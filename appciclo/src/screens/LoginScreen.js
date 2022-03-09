@@ -4,7 +4,7 @@ import { Text, StyleSheet,Image, View, TextInput, Button, Alert } from "react-na
 
 function LoginScreen ({navigation}) {
     return (
-        <View style= {{padding: 50, marginTop: 30}}>
+        <View style= {{padding: 50}}>
             <Image 
                 style={{ width: 130, height: 130, alignSelf:"center"}}
                 source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1059/1059475.png?w=740' }}

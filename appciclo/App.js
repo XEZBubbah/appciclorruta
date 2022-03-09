@@ -2,10 +2,12 @@ import MapScreen from './src/screens/MapScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import CrearUsuaScreen from './src/screens/CrearUsuaScreen';
 import RecuperarContScreen from './src/screens/RecuperarContScreen';
+import CambioContraScreen from './src/screens/CambioContraScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 
 const Stack = createStackNavigator();
 
@@ -28,6 +30,10 @@ function App () {
             <Stack.Screen
               name="Map View"
               component={MapScreen}
+            />
+            <Stack.Screen
+              name="Cambiar Contraseña"
+              component={CambioContraScreen}
             /> 
           </Stack.Navigator>
         </NavigationContainer>

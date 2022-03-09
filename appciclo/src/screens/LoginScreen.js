@@ -22,13 +22,13 @@ function LoginScreen ({navigation}) {
             />
             <Text 
                 onPress={() => navigation.navigate('Recuperar Contraseña')}
-                style= {{marginTop: 20, color: '#0000ff'}}
+                style= {{marginTop: 20, color: '#0000ff', alignSelf: 'center'}}
                 color= '#0000ff'
             >
                 ¿Olvidaste la Contraseña? </Text>
             <Text 
                 onPress={() => navigation.navigate('Crear Usuario')}
-                style= {{marginTop: 5, color: '#0000ff'}}
+                style= {{marginTop: 10, color: '#0000ff', alignSelf: 'center'}}
                 color= '#0000ff'
             > 
                 Crear Cuenta </Text>

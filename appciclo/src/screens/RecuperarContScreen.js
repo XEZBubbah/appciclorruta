@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Text, StyleSheet,SafeAreaView, View, TextInput, Button, Alert } from "react-native";
 
 function RecuperarContScreen(navigation) {

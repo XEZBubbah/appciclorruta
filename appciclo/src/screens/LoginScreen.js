@@ -27,7 +27,7 @@ function LoginScreen ({navigation}) {
                 >
                     ¿Olvidaste la Contraseña? </Text>
                 <Text 
-                    onPress={() => navigation.navigate('Crear Usuario')}
+                    onPress={() => navigation.navigate('Map View')}
                     style= {{marginTop: 5, color: '#0000ff'}}
                     color= '#0000ff'
                 > 

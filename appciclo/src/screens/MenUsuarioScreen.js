@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, SafeAreaView } from "react-native";
 
-const  MenUsuarioScreen = ({ navigation }) => {
+function  MenUsuarioScreen () {
 
     return (
         <SafeAreaView style= {{padding: 50, marginTop: 30}}>

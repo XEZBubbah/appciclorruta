@@ -4,7 +4,7 @@ import { Text, StyleSheet } from "react-native";
 import Map from "../components/Map"; 
 
 
-const MapScreen = ({ navigation }) => {
+function MapScreen () {
     return (
         <SafeAreaView forceInset = {{ top: 'always'}}>
             <Text style= {{ fontSize: 20 }}>  </Text>

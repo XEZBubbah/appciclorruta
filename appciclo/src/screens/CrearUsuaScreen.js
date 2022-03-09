@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, StyleSheet,SafeAreaView, View, TextInput, Button, Alert } from "react-native";
 
-const CrearUsuaScreen = ({ navigation }) => {
+function CrearUsuaScreen (navigation) {
 
     return (
         <SafeAreaView style= {{padding: 20,marginTop: 10}}>

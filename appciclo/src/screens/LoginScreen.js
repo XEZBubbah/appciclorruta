@@ -32,6 +32,12 @@ function LoginScreen ({navigation}) {
                 color= '#0000ff'
             > 
                 Crear Cuenta </Text>
+                <Text 
+                onPress={() => navigation.navigate('Noticias')}
+                style= {{marginTop: 10, color: '#0000ff', alignSelf: 'center'}}
+                color= '#0000ff'
+            > 
+                Noticias </Text>
         </View>
     )
 }

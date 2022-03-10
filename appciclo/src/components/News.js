@@ -48,7 +48,7 @@ class News extends Component {
                                 <View key={index}>
                                     <Image source={{ uri: `${news.urlToImage}`}} 
                                     style= {{height: 100, width: 100, borderRadius: 10}} />
-                                    <Text> {news.title} </Text>
+                                    <Text style={{alignSelf:"auto"}} > {news.title} </Text>
                                 </View>
                             ))
                         }

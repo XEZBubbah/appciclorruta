@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { View, Text, ActivityIndicator, ScrollView, Image, StyleSheet } from "react-native";
-import { NativeBaseProvider, Box, AspectRatio, Center, Stack, Heading, HStack } from "native-base";
+import { NativeBaseProvider, Box, AspectRatio, Center, Stack, Heading, HStack, Link } from "native-base";
 
 const API_KEY = '0b51069c92a6439ca92cec0af62ad543';
 
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     horizontal: {
       flexDirection: "row",
       justifyContent: "space-around",
-      padding: 10
+      padding: 5
     }
 });
 
@@ -30,7 +30,6 @@ class News extends Component {
                 news: response.articles
             })
             console.log(this.state.news.length) 
-            console.log(response)
         })
         .catch(error =>{
             console.log(error);
@@ -50,7 +49,7 @@ class News extends Component {
                                 <View key={index}>
                                 <NativeBaseProvider>
                                     <Box alignItems="center">
-                                        <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+                                        <Box maxW={"xl"} rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
                                             borderColor: "coolGray.600",
                                             backgroundColor: "gray.700"
                                         }} _web={{
@@ -72,21 +71,16 @@ class News extends Component {
                                     fontWeight: "700",
                                     fontSize: "xs"
                                     }} position="absolute" bottom="0" px="3" py="1.5">
-                                        {news.url}
+                                        {news.source.name}
                                     </Center>
                                     </Box>
                                     <Stack p="4" space={3}>
                                     <Stack space={2}>
-                                        <Heading size="md" ml="-1" >
-                                            {news.title}
-                                        </Heading>
-                                        <Text fontSize="xs" _light={{
-                                        color: "violet.500"
-                                    }} _dark={{
-                                        color: "violet.400"
-                                    }} fontWeight="500" ml="-0.5" mt="-1">
-                                        The Silicon Valley of India.
-                                        </Text>
+                                        <Link href={news.url}>
+                                            <Heading size="md" ml="-1" >
+                                                {news.title}
+                                            </Heading>
+                                        </Link>
                                     </Stack>
                                     <Text fontWeight="400">
                                         {news.description}
@@ -96,7 +90,7 @@ class News extends Component {
                                         <Text color="coolGray.600" _dark={{
                                         color: "warmGray.200"
                                         }} fontWeight="400">
-                                            {news.publishedAt}
+                                            {news.publishedAt.substring(0,10)}
                                         </Text>
                                         </HStack>
                                     </HStack>
@@ -104,6 +98,7 @@ class News extends Component {
                                 </Box>
                                 </Box>
                                 </NativeBaseProvider>
+                                <Text style={{fontSize: 10}}> </Text>
                                 </View>
                             ))
                         }

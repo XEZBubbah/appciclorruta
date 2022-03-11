@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, ScrollView, Image, StyleSheet } from "re
 import { NativeBaseProvider, Box, AspectRatio, Center, Stack, Heading, HStack, Link } from "native-base";
 
 const API_KEY = '0b51069c92a6439ca92cec0af62ad543';
+const API_KEY2 = '21dee9c2ff47493cb045541fc77d1b59';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,13 +23,14 @@ class News extends Component {
     }
     componentDidMount() {
         fetch(
-            `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`,
+            `https://newsapi.org/v2/everything?qInTitle=ciclismo&language=es&apiKey=${API_KEY2}`,
         )
         .then(res => res.json())
         .then(response => {
             this.setState({
                 news: response.articles
             })
+            console.log(response.status)
             console.log(this.state.news.length) 
         })
         .catch(error =>{

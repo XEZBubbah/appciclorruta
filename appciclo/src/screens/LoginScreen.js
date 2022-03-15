@@ -1,55 +1,70 @@
 import * as React from "react";
-import { Text, StyleSheet,Image, View, TextInput, Button, Alert } from "react-native";
+import { Image } from "react-native";
+import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text, Divider} from 'native-base'
 
 
 function LoginScreen ({navigation}) {
     return (
-        <View style= {{padding: 50}}>
+        <NativeBaseProvider>
+            <Center w="100%">
+            <Box safeArea p="2" py="8" w="90%" maxW="290">
             <Image 
                 style={{ width: 130, height: 130, alignSelf:"center"}}
                 source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1059/1059475.png?w=740' }}
             ></Image>
-            <Text style= {{ fontSize: 20, padding: 10, color: '#808080', fontFamily: 'sans-serif', alignSelf:"center" }}> BikeApp </Text>
-            <Text style= {{ fontSize: 35, marginTop: 30, fontWeight: 'bold'}}> Inicia Sesión </Text>
-            <Text style= {{ fontSize: 15, marginTop: 5, color: '#808080', fontStyle:"italic"}}> Inicia sesión para usar la app </Text>
-            <Text style= {{ marginTop: 20, marginLeft: 10}}>Correo Electronico</Text>
-            <TextInput keyboardType="email-address" style={styles.input}/>
-            <Text style= {{ marginTop: 5, marginLeft: 10}}>Contraseña</Text>
-            <TextInput secureTextEntry= {true} style={styles.input}/>
-            <Button
-                title="Iniciar Sesión"
-                onPress={() => Alert.alert('Button with adjusted color pressed')}
-            />
-            <Text 
-                onPress={() => navigation.navigate('Recuperar Contraseña')}
-                style= {{marginTop: 20, color: '#0000ff', alignSelf: 'center'}}
-                color= '#0000ff'
-            >
-                ¿Olvidaste la Contraseña? </Text>
-            <Text 
-                onPress={() => navigation.navigate('Crear Usuario')}
-                style= {{marginTop: 10, color: '#0000ff', alignSelf: 'center'}}
-                color= '#0000ff'
-            > 
-                Crear Cuenta </Text>
-                <Text 
-                onPress={() => navigation.navigate('Noticias')}
-                style= {{marginTop: 10, color: '#0000ff', alignSelf: 'center'}}
-                color= '#0000ff'
-            > 
-                Noticias </Text>
-        </View>
+            <Text></Text>
+            <Heading size="xl" fontWeight="600" color="coolGray.800" _dark={{
+                color: "warmGray.50",
+                alignSelf: "center",
+            }}>
+                BikeApp
+            </Heading>
+            <Heading mt="1" _dark={{
+                color: "warmGray.200"
+            }} color="coolGray.600" fontWeight="medium" size="xs">
+                Inicia Sesión para continuar
+            </Heading>
+
+                <VStack space={3} mt="5">
+                <FormControl>
+                    <FormControl.Label>Email</FormControl.Label>
+                    <Input />
+                </FormControl>
+                <FormControl>
+                    <FormControl.Label>Contraseña</FormControl.Label>
+                    <Input type="password" />
+                    <Link _text={{
+                    fontSize: "xs",
+                    fontWeight: "500",
+                    color: "indigo.500"
+                    }} alignSelf="flex-end" mt="1"
+                    onPress={() => navigation.navigate('Recuperar Contraseña')}>
+                    ¿Recuperar Contraseña?
+                    </Link>
+                </FormControl>
+                <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('Menú Usuario')}>
+                    Iniciar Sesión
+                </Button>
+                <HStack mt="6" justifyContent="center">
+                    <Text fontSize="sm" color="coolGray.600" _dark={{
+                    color: "warmGray.200"
+                }}>
+                    Soy nuevo usuario.{" "}
+                    </Text>
+                    <Link _text={{
+                        color: "indigo.500",
+                        fontWeight: "medium",
+                        fontSize: "sm"
+                        }} onPress={() => navigation.navigate('Crear Usuario')}>
+                        Registrarme
+                    </Link>
+                </HStack>
+                </VStack>
+            </Box>
+            </Center>
+        </NativeBaseProvider>
     )
 }
 
-const styles = StyleSheet.create({
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-      
-    },
-  });
 
 export default LoginScreen

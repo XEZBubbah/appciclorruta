@@ -1,17 +1,12 @@
 import React from "react";
 import { ScrollView, Center, Divider, Button, NativeBaseProvider} from 'native-base'
 
-function  MenUsuarioScreen ({navigation}) {
+function  PerfilScreen ({navigation}) {
 
     return (
         <NativeBaseProvider>
         <Center>
-            <ScrollView  maxW="300" _contentContainerStyle={{
-                px: "20px",
-                minW: "72",
-                marginTop: "20"
-                
-            }}>
+            <ScrollView >
                 <Button size={"lg"} > Perfil </Button>
                 <Divider my={3} />
                 <Button size={"lg"} > Itinerarios </Button>
@@ -35,4 +30,4 @@ function  MenUsuarioScreen ({navigation}) {
     )
 }
 
-export default  MenUsuarioScreen
+export default  PerfilScreen

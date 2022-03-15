@@ -4,6 +4,7 @@ import CrearUsuaScreen from './src/screens/CrearUsuaScreen';
 import RecuperarContScreen from './src/screens/RecuperarContScreen';
 import CambioContraScreen from './src/screens/CambioContraScreen';
 import NoticiasScreen from './src/screens/NoticiasScreen';
+import MenUsuarioScreen from './src/screens/MenUsuarioScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,6 +24,10 @@ function App () {
             <Stack.Screen
               name="Crear Usuario"
               component={CrearUsuaScreen}
+            />
+            <Stack.Screen
+              name="Menú Usuario"
+              component={MenUsuarioScreen}
             />
             <Stack.Screen
               name="Recuperar Contraseña"

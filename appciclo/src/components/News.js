@@ -23,7 +23,7 @@ class News extends Component {
     }
     componentDidMount() {
         fetch(
-            `https://newsapi.org/v2/everything?qInTitle=ciclismo&language=es&apiKey=${API_KEY2}`,
+            `https://newsapi.org/v2/everything?qInTitle=ciclismo&language=es&apiKey=${API_KEY}`,
         )
         .then(res => res.json())
         .then(response => {

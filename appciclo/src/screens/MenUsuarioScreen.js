@@ -10,18 +10,26 @@ function  MenUsuarioScreen ({navigation}) {
                 px: "20px",
                 minW: "72",
                 marginTop: "20"
-                
             }}>
                 <Button 
                     size={"lg"} 
                     onPress={() => navigation.navigate('Perfil')}
                 > Perfil </Button>
                 <Divider my={3} />
-                <Button size={"lg"} > Itinerarios </Button>
+                <Button 
+                    size={"lg"} 
+                    onPress={() => navigation.navigate('Itinerarios')}
+                > Itinerarios </Button>
                 <Divider my={3} />
-                <Button size={"lg"} > Grupos </Button>
+                <Button 
+                    size={"lg"} 
+                    onPress={() => navigation.navigate('Grupos')}    
+                > Grupos </Button>
                 <Divider my={3} />
-                <Button size={"lg"} > Reportes </Button>
+                <Button 
+                    size={"lg"} 
+                    onPress={() => navigation.navigate('Reportes')} 
+                > Reportes </Button>
                 <Divider my={3} />
                 <Button 
                     size={"lg"} 

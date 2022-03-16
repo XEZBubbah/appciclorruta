@@ -30,7 +30,7 @@ class News extends Component {
             this.setState({
                 news: response.articles
             })
-            console.log(response.status)
+            console.log(response.articles)
             console.log(this.state.news.length) 
         })
         .catch(error =>{
@@ -106,7 +106,6 @@ class News extends Component {
                         }
                     </ScrollView>)
                 }
-
             </View>
         );
     }

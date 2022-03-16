@@ -1,6 +1,6 @@
 import React from "react";
 import News from "../components/News";
-import { View, StyleSheet} from "react-native";
+import { View } from "react-native";
 
 function NoticiasScreen ({navigation}) {
     return(

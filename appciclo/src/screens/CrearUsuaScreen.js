@@ -1,11 +1,6 @@
 import * as React from "react";
-import { View } from "react-native";
-import { Button, NativeBaseProvider, Heading, Box, VStack, FormControl, Input, Link, HStack, Text, Center} from 'native-base'
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center} from 'native-base'
 import MyDatePicker from "./../components/DatePicker";
-
-const Separator = () => (
-    <View style={styles.separator} />
-);
 
 
 function CrearUsuaScreen ({navigation}) {

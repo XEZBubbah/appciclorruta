@@ -6,6 +6,12 @@ import CambioContraScreen from './src/screens/CambioContraScreen';
 import NoticiasScreen from './src/screens/NoticiasScreen';
 import MenUsuarioScreen from './src/screens/MenUsuarioScreen';
 import PerfilScreen from './src/screens/PerfilScreen';
+import ItinerarioScreen from './src/screens/ItinerariosScreen';
+import CrearItinerarioScreen from './src/screens/CrearItinierarioScreen';
+import GrupoScreen from './src/screens/GrupoScreen';
+import CrearGrupoScreen from './src/screens/CrearGrupoScreen';
+import ReporteScreen from './src/screens/ReporteScreen';
+import CrearReporteScreen from './src/screens/CrearReporteScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -49,6 +55,30 @@ function App () {
             <Stack.Screen
               name="Perfil"
               component={PerfilScreen}
+            /> 
+            <Stack.Screen
+              name="Itinerarios"
+              component={ItinerarioScreen}
+            />
+            <Stack.Screen
+              name="Crear Itinerario"
+              component={CrearItinerarioScreen}
+            />
+            <Stack.Screen
+              name="Crear Grupo"
+              component={CrearGrupoScreen}
+            /> 
+            <Stack.Screen
+              name="Grupos"
+              component={GrupoScreen}
+            />  
+            <Stack.Screen
+              name="Reportes"
+              component={ReporteScreen}
+            /> 
+            <Stack.Screen
+              name="Crear Reporte"
+              component={CrearReporteScreen}
             /> 
           </Stack.Navigator>
         </NavigationContainer>

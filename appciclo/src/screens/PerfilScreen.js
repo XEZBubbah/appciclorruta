@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Center,Image, Divider, Link, NativeBaseProvider, Heading, Pressable, HStack, Badge, Spacer, Flex} from 'native-base'
+import { Box, Text, Center,Image, Divider, Link, NativeBaseProvider, Heading, Pressable, HStack, Badge, Spacer} from 'native-base'
 
 function  PerfilScreen ({navigation}) {
 

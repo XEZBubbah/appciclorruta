@@ -12,7 +12,10 @@ function  MenUsuarioScreen ({navigation}) {
                 marginTop: "20"
                 
             }}>
-                <Button size={"lg"} > Perfil </Button>
+                <Button 
+                    size={"lg"} 
+                    onPress={() => navigation.navigate('Perfil')}
+                > Perfil </Button>
                 <Divider my={3} />
                 <Button size={"lg"} > Itinerarios </Button>
                 <Divider my={3} />

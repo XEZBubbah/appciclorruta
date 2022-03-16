@@ -5,6 +5,7 @@ import RecuperarContScreen from './src/screens/RecuperarContScreen';
 import CambioContraScreen from './src/screens/CambioContraScreen';
 import NoticiasScreen from './src/screens/NoticiasScreen';
 import MenUsuarioScreen from './src/screens/MenUsuarioScreen';
+import PerfilScreen from './src/screens/PerfilScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -44,6 +45,10 @@ function App () {
             <Stack.Screen
               name="Noticias"
               component={NoticiasScreen}
+            /> 
+            <Stack.Screen
+              name="Perfil"
+              component={PerfilScreen}
             /> 
           </Stack.Navigator>
         </NavigationContainer>

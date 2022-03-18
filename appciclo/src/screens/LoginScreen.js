@@ -1,9 +1,21 @@
 import * as React from "react";
 import { Image } from "react-native";
 import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text} from 'native-base'
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 function LoginScreen ({navigation}) {
+
+    const formik = useFormik({
+        initialValues: initialValues(),
+        validationSchema: Yup.object(validationSchema()),
+        validateOnChange: false,
+        onSubmit: (formValue) => {
+            console.log ("Datos enviados ..");
+            console.log(formValue);
+        },
+    });
+
     return (
         <NativeBaseProvider>
             <Center w="100%">
@@ -28,11 +40,20 @@ function LoginScreen ({navigation}) {
                 <VStack space={3} mt="5">
                 <FormControl>
                     <FormControl.Label>Email</FormControl.Label>
-                    <Input />
+                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.email}</Text>
+                    <Input 
+                        value={formik.values.email}
+                        onChangeText={(text) => formik.setFieldValue("email", text)} 
+                    />
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>Contraseña</FormControl.Label>
-                    <Input type="password" />
+                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.password}</Text>
+                    <Input 
+                        type="password" 
+                        value={formik.values.password}
+                        onChangeText={(text) => formik.setFieldValue("password", text)}
+                    />
                     <Link _text={{
                     fontSize: "xs",
                     fontWeight: "500",
@@ -42,7 +63,12 @@ function LoginScreen ({navigation}) {
                     ¿Recuperar Contraseña?
                     </Link>
                 </FormControl>
-                <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('Menú Usuario')}>
+                
+                <Button mt="2" colorScheme="indigo" onPress={() =>   
+                    formik.handleSubmit()
+                }
+                
+                >
                     Iniciar Sesión
                 </Button>
                 <HStack mt="6" justifyContent="center">
@@ -64,6 +90,21 @@ function LoginScreen ({navigation}) {
             </Center>
         </NativeBaseProvider>
     )
+}
+
+function initialValues(){
+
+    return {
+        email: "",
+        password: ""
+    }
+}
+
+function validationSchema(){
+    return {
+        email: Yup.string().required("Ingrese un email"),
+        password: Yup.string().required("Ingrese una contraseña"), 
+    }
 }
 
 

@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea} from 'native-base'
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea,Text} from 'native-base'
+import TimePicker from "../components/TimePicker";
 
 
 function CrearItinerarioScreen ({navigation}) {
@@ -14,12 +15,12 @@ function CrearItinerarioScreen ({navigation}) {
                     <Input />
                 </FormControl>
                 <FormControl>
-                    <FormControl.Label>Hora Salida</FormControl.Label>
-                    <Input />
+                    <FormControl.Label>Hora Inicio</FormControl.Label>
+                    <TimePicker></TimePicker>
                 </FormControl>
                 <FormControl>
-                    <FormControl.Label>Hora Llegada</FormControl.Label>
-                    <Input />
+                    <FormControl.Label>Hora Fin</FormControl.Label>
+                    <TimePicker></TimePicker>
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>Descripción</FormControl.Label>

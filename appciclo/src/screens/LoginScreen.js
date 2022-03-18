@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image } from "react-native";
-import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text, Divider} from 'native-base'
+import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text} from 'native-base'
 
 
 function LoginScreen ({navigation}) {

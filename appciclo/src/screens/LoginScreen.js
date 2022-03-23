@@ -18,7 +18,7 @@ function LoginScreen ({navigation}) {
         onSubmit: async (formValue) => {
             try {
                 console.log(formValue);
-                const {data} = await axios.post('http://192.168.1.3:5000/userM/signinMov', {...formValue});
+                const {data} = await axios.post('http://192.168.1.6:5000/userM/signinMov', {...formValue});
                 console.log ("Datos enviados ..");
                 onLogin();
             }

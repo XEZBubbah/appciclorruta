@@ -4,8 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 
-function DatePicker() {
-  
+function DatePickerComp() {
   const [date, setDate] = useState(new Date());
   const [text, setText] = useState('Empty');
   const [mode, setMode] = useState('date');
@@ -51,4 +50,4 @@ function DatePicker() {
   );
 }
 
-export default DatePicker
+export default DatePickerComp

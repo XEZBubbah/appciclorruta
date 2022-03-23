@@ -1,10 +1,64 @@
 import * as React from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center} from 'native-base'
-import DatePicker from "./../components/DatePicker";
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView} from 'native-base'
+import { useState } from 'react'
+import { View } from "react-native";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
+let fecha = "";
+
+function DatePickerComp() {
+
+    const [date, setDate] = useState(new Date());
+    const [text, setText] = useState('Empty');
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    
+  
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate;
+      setShow(false);
+      setDate(currentDate);
+        
+      let tempDate = new Date(currentDate);
+      let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+      setText(fDate);
+      fecha = tempDate;
+  
+      console.log(fecha);
+    };
+  
+    const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+    };
+  
+    const showDatepicker = () => {
+      showMode('date');
+    };
+  
+    return (
+      <View>
+        <Button onPress = {showDatepicker}> Selecciona una fecha </Button> 
+        <Text style={{alignSelf:"center"}}> {text}</Text>
+        {
+        show && 
+        (
+            <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            display='default'
+            onChange={onChange}
+        />
+        )
+        }
+      </View>
+      
+    );
+};
 
 function CrearUsuaScreen ({navigation}) {
     
@@ -19,7 +73,7 @@ function CrearUsuaScreen ({navigation}) {
             onSubmit: async (formValue) => {
                 try {
                     console.log(formValue);
-                    const {data} = await axios.post('http://192.168.1.3:5000/userM/signupMov', {...formValue});
+                    const {data} = await axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue});
                     console.log ("Datos enviados ..");
                     onSingup();
                 }
@@ -31,12 +85,15 @@ function CrearUsuaScreen ({navigation}) {
         });
 
     return (
+       
         <NativeBaseProvider>
+        <ScrollView maxW="400" h="80">
             <Center w="100%">
             <Box safeArea p="2" py="8" w="90%" maxW="290">
                 <VStack space={3} mt="5">
                 <FormControl>
                     <FormControl.Label>Nombre</FormControl.Label>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.firstName}</Text>
                     <Input 
                         value={formik.values.firstName}
                         onChangeText={(text) => formik.setFieldValue("firstName", text)} 
@@ -44,27 +101,48 @@ function CrearUsuaScreen ({navigation}) {
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>Apellido</FormControl.Label>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.lastName}</Text>
                     <Input 
                         value={formik.values.lastName}
                         onChangeText={(text) => formik.setFieldValue("lastName", text)} 
                     />
                 </FormControl>
                 <FormControl>
+                    <FormControl.Label>Username</FormControl.Label>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.userName}</Text>
+                    <Input 
+                        value={formik.values.userName}
+                        onChangeText={(text) => formik.setFieldValue("userName", text)} 
+                    />
+                </FormControl>
+                <FormControl>
                     <FormControl.Label>Fecha de Nacimiento</FormControl.Label>
-                    <DatePicker></DatePicker>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.birthDate}</Text>
+                    <DatePickerComp></DatePickerComp>
                 </FormControl>
                 <FormControl>
                     <FormControl.Label>Email</FormControl.Label>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.email}</Text>
                     <Input 
                         value={formik.values.email}
                         onChangeText={(text) => formik.setFieldValue("email", text)}
                     />
                 </FormControl>
                 <FormControl>
+                    <FormControl.Label>Número Celular</FormControl.Label>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.phone}</Text>
+                    <Input 
+                        value={formik.values.phone}
+                        onChangeText={(text) => formik.setFieldValue("phone", text)}
+                    />
+                </FormControl>
+                <FormControl>
                     <FormControl.Label>Contraseña</FormControl.Label>
+                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.password}</Text>
                     <Input 
                         type="password" 
-                        value={formik.values.password}    
+                        value={formik.values.password}
+                        onChangeText={(text) => formik.setFieldValue("password", text)}    
                     />
                 </FormControl>
                 <Button mt="2" colorScheme="indigo" onPress={() => 
@@ -89,6 +167,7 @@ function CrearUsuaScreen ({navigation}) {
                 </VStack>
             </Box>
             </Center>
+        </ScrollView>
         </NativeBaseProvider>
     )
 }
@@ -100,10 +179,10 @@ function initialValues(){
         firstName: "", 
         lastName: "",
         userName: "",
-        birthDate: null,
+        birthDate: fecha,
         phone: "",
         email: "", 
-        password: ""
+        password: "",
     }
 }
 
@@ -112,8 +191,7 @@ function validationSchema(){
         firstName: Yup.string().required("Este campo no se puede dejar vacio"),
         lastName: Yup.string().required("Este campo no se puede dejar vacio"),
         userName: Yup.string().required("Este campo no se puede dejar vacio"),
-        birthDate: Yup.date().required("Este campo no se puede dejar vacio").nullable(),
-        phone: Yup.string().required("Este campo no se puede dejar vacio"),
+        phone: Yup.number().required("Este campo no se puede dejar vacio"),
         email: Yup.string().required("Ingrese un email").email("Email invalido"),
         password: Yup.string().required("Ingrese una contraseña")
     }

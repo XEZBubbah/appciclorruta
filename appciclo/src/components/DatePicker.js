@@ -1,40 +1,54 @@
-import React, { Component } from 'react';
-import DatePicker from 'react-native-datepicker';
+import React, { useState } from 'react'
+import { View ,Button, Text } from "react-native";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default class MyDatePicker extends Component {
-    
-    constructor(props){
-      super(props)
-      this.state = {date:"2016-05-15"}
-    }
+
+
+function DatePicker() {
   
-    render(){
-      return (
-        <DatePicker
-          style={{width: 200}}
-          date={this.state.date}
-          androidMode='spinner'
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          minDate="1910-01-01"
-          maxDate="2022-01-01"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 36
-            }
-            // ... You can check the source to find the other keys.
-          }}
-          onDateChange={(date) => {this.setState({date: date})}}
+  const [date, setDate] = useState(new Date());
+  const [text, setText] = useState('Empty');
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+
+    let fDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    setText(fDate);
+
+    console.log(fDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  return (
+    <View>
+      <Button title="Selecciona la Fecha" onPress = {showDatepicker}/>
+      <Text></Text>
+      <Text style={{alignSelf:"center"}}> {text}</Text>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          display='calendar'
+          onChange={onChange}
         />
-      )
-    }
-  }
+      )}
+    </View>
+    
+  );
+}
+
+export default DatePicker

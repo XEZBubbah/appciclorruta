@@ -3,16 +3,29 @@ import { Image } from "react-native";
 import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text} from 'native-base'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from "axios";
 
 function LoginScreen ({navigation}) {
+
+    const onLogin = () => {
+        navigation.navigate('Menú Usuario')
+    };
 
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         validateOnChange: false,
-        onSubmit: (formValue) => {
-            console.log ("Datos enviados ..");
-            console.log(formValue);
+        onSubmit: async (formValue) => {
+            try {
+                console.log(formValue);
+                const {data} = await axios.post('http://192.168.1.3:5000/userM/signinMov', {...formValue});
+                console.log ("Datos enviados ..");
+                onLogin();
+            }
+            
+            catch (error) {
+                console.log(error)
+            }
         },
     });
 
@@ -102,7 +115,7 @@ function initialValues(){
 
 function validationSchema(){
     return {
-        email: Yup.string().required("Ingrese un email"),
+        email: Yup.string().required("Ingrese un email").email("Email invalido"),
         password: Yup.string().required("Ingrese una contraseña"), 
     }
 }

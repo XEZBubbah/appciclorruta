@@ -179,7 +179,6 @@ function initialValues(){
         firstName: "", 
         lastName: "",
         userName: "",
-        //birthDate: fecha,
         phone: "",
         email: "", 
         password: "",

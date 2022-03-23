@@ -7,7 +7,7 @@ import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
-let fecha = "";
+var fecha = "";
 
 function DatePickerComp() {
 
@@ -25,8 +25,8 @@ function DatePickerComp() {
       let tempDate = new Date(currentDate);
       let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
       setText(fDate);
+
       fecha = tempDate;
-  
       console.log(fecha);
     };
   
@@ -47,12 +47,12 @@ function DatePickerComp() {
         show && 
         (
             <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            display='default'
-            onChange={onChange}
-        />
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                display='default'
+                onChange={onChange}
+            />
         )
         }
       </View>
@@ -65,15 +65,16 @@ function CrearUsuaScreen ({navigation}) {
         const onSingup = () => {
             navigation.navigate('Login')
         };
-    
         const formik = useFormik({
             initialValues: initialValues(),
             validationSchema: Yup.object(validationSchema()),
             validateOnChange: false,
             onSubmit: async (formValue) => {
                 try {
+                    var birthDate = fecha;
+                    console.log('Entre: ' +birthDate);
                     console.log(formValue);
-                    const {data} = await axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue});
+                    const {data} = await axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue, birthDate});
                     console.log ("Datos enviados ..");
                     onSingup();
                 }
@@ -174,12 +175,11 @@ function CrearUsuaScreen ({navigation}) {
 
 
 function initialValues(){
-
     return {
         firstName: "", 
         lastName: "",
         userName: "",
-        birthDate: fecha,
+        //birthDate: fecha,
         phone: "",
         email: "", 
         password: "",

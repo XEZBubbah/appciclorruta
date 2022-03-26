@@ -7,7 +7,7 @@ import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
-var fecha = "";
+let fecha = "";
 
 function DatePickerComp() {
 

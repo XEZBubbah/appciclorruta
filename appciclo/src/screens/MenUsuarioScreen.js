@@ -1,7 +1,28 @@
-import React from "react";
-import { ScrollView, Center, Divider, Button, NativeBaseProvider} from 'native-base'
+import React, { useEffect } from "react";
+import { ScrollView, Center, Divider, Button, NativeBaseProvider, Text} from 'native-base'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function  MenUsuarioScreen ({navigation}) {
+
+    const [name, setName] = React.useState('');
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+
+        try {
+            AsyncStorage.getItem('UserName')
+                .then(value =>{
+                    if (value != null){
+                        setName(value)
+                    }
+                })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <NativeBaseProvider>
@@ -11,6 +32,8 @@ function  MenUsuarioScreen ({navigation}) {
                 minW: "72",
                 marginTop: "20"
             }}>
+                <Text>{name}</Text>
+                <Divider my={3}></Divider>
                 <Button 
                     size={"lg"} 
                     onPress={() => navigation.navigate('Perfil')}

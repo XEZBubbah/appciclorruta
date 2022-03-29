@@ -4,25 +4,6 @@ import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badg
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const [name, setName] = React.useState('');
-
-React.useEffect(() => {
-    getData();
-}, []);
-
-const getData = () => {
-    try {
-        AsyncStorage.getItem('UserName')
-            .then(value =>{
-                if (value != null){
-                    setName(value)
-                }
-            })
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -38,13 +19,28 @@ const styles = StyleSheet.create({
 class GrupoC extends Component {
 
     state = {
-        grupos: []
-    }
-    
-    componentDidMount(){
-
-        
-
+        grupos: [
+            {
+            "nombre": "Grupo 1", 
+            "descripcion": "Grupo para jaksdsakbd kanskdbwwqug a d.snkjashsabsa ñlkoopre",
+            "visibilidad":"Publico", 
+            },
+            {
+                "nombre": "Grupo 2", 
+                "descripcion": "Grupo de opwqpujpwie  ieqho hdas lkasdhl asdiowqhjeahnewh",
+                "visibilidad":"Privado", 
+            },
+            {
+                "nombre": "Grupo 3", 
+                "descripcion": "iuowqhwequo wqj kas njajskhquoh kenrewujwerio er jweioh dm",
+                "visibilidad":"Publico",
+            },
+            {
+                "nombre": "Grupo 4", 
+                "descripcion": "Grupo kjuwquie wqoiuh ewqo aslnwq8dh dqwoi a sdljkashnwoaish",
+                "visibilidad":"Privado",
+            },
+        ]
     }
 
     render(){

@@ -22,8 +22,8 @@ function LoginScreen ({navigation}) {
         onSubmit: async (formValue) => {
             try {
                 console.log(formValue);
-                setName(formValue.userName);
-                console.log('Soy: '+formValue.userName);
+                setName(formValue.email);
+                console.log('Soy: '+formValue.email);
                 await AsyncStorage.setItem('UserName', name);
                 const {data} = await axios.post('http://192.168.1.6:5000/userM/signinMov', {...formValue});
                 console.log ("Datos enviados ..");
@@ -58,12 +58,11 @@ function LoginScreen ({navigation}) {
 
                 <VStack space={3} mt="5">
                 <FormControl>
-                    <FormControl.Label>Nombre de Usuario</FormControl.Label>
-                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.userName}</Text>
+                    <FormControl.Label>Email</FormControl.Label>
+                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.email}</Text>
                     <Input 
-                        autoCapitalize="none"
-                        value={formik.values.userName}
-                        onChangeText={(text) => formik.setFieldValue("userName", text)} 
+                        value={formik.values.email}
+                        onChangeText={(text) => formik.setFieldValue("email", text)} 
                     />
                 </FormControl>
                 <FormControl>
@@ -86,7 +85,7 @@ function LoginScreen ({navigation}) {
                 
                 <Button mt="2" colorScheme="indigo" onPress={() =>   
                     {
-                        setName(formik.values.userName); 
+                        setName(formik.values.email); 
                         formik.handleSubmit();
                     }
                 }
@@ -118,14 +117,14 @@ function LoginScreen ({navigation}) {
 function initialValues(){
 
     return {
-        userName: "",
+        email: "",
         password: ""
     }
 }
 
 function validationSchema(){
     return {
-        userName: Yup.string().required("Ingrese un nombre de Usuario"),
+        email: Yup.string().required("Ingrese un email").email("Email invalido"),
         password: Yup.string().required("Ingrese una contraseña"), 
     }
 }

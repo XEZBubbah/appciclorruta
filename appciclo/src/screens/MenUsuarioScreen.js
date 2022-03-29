@@ -11,6 +11,7 @@ function  MenUsuarioScreen ({navigation}) {
     }, []);
 
     const getData = () => {
+
         try {
             AsyncStorage.getItem('UserName')
                 .then(value =>{

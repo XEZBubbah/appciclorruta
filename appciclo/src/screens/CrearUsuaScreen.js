@@ -112,7 +112,6 @@ function CrearUsuaScreen ({navigation}) {
                     <FormControl.Label>Username</FormControl.Label>
                     <Text fontSize={"10"} color={"danger.500"}>{formik.errors.userName}</Text>
                     <Input 
-                        autoCapitalize="none"
                         value={formik.values.userName}
                         onChangeText={(text) => formik.setFieldValue("userName", text)} 
                     />
@@ -162,7 +161,7 @@ function CrearUsuaScreen ({navigation}) {
                         color: "indigo.500",
                         fontWeight: "medium",
                         fontSize: "sm"
-                        }} onPress={() => navigation.navigate('Login')}>
+                        }} onPress={() => this.props.nom.navigate('Login')}>
                         Inciar Sesión
                     </Link>
                 </HStack>

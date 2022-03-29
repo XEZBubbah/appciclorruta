@@ -1,55 +1,8 @@
 import * as React from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack, Text} from 'native-base';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import axios from "axios";
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack} from 'native-base'
 
 
 function CrearGrupoScreen ({navigation}) {
-    const [name, setName] = React.useState('');
-
-    React.useEffect(() => {
-        getData();
-    }, []);
-
-    const getData = () => {
-        try {
-            AsyncStorage.getItem('UserName')
-                .then(value =>{
-                    if (value != null){
-                        setName(value)
-                    }
-                })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const [value, setValue] = React.useState('');
-
-    const onGrupo = () => {
-        navigation.navigate('Grupos')
-    };
-
-    const formik = useFormik({
-        initialValues: initialValues(),
-        validationSchema: Yup.object(validationSchema()),
-        validateOnChange: false,
-        onSubmit: async (formValue) => {
-            try {
-                var Usuario = name;
-                console.log(formValue);
-                console.log('Soy '+ Usuario);
-                const {data} = await axios.post('http://192.168.1.6:5000/groupM/createGroupMov', {...formValue, Usuario});
-                console.log ("Datos enviados ..");
-                onGrupo();
-            }       
-            catch (error) {
-                console.log(error)
-            }
-        },
-    });
 
     return (
         <NativeBaseProvider>
@@ -58,61 +11,33 @@ function CrearGrupoScreen ({navigation}) {
                 <VStack space={3} mt="5">
                 <FormControl>
                     <FormControl.Label>Nombre Grupo</FormControl.Label>
-                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.Nombre_Grupo}</Text>
-                    <Input 
-                        value={formik.values.Nombre_Grupo}
-                        onChangeText={(text) => formik.setFieldValue("Nombre_Grupo", text)}    
-                    />
+                    <Input />
                 </FormControl>
                 <FormControl>
-                <FormControl.Label>Visibilidad</FormControl.Label>
-                <Text fontSize={"12"} color={"danger.500"}>{formik.errors.Visibilidad}</Text>
-                <Radio.Group name="exampleGroup" defaultValue="1" accessibilityLabel="pick a size" value={value} 
-                    onChange= { 
-                        nextValue => {
-                            setValue(nextValue);
-                            console.log(nextValue)
-                            formik.values.Visibilidad = nextValue;
-                        }
-                    }
-                >
+                    <FormControl.Label>Visibilidad</FormControl.Label>
+                    <Radio.Group name="exampleGroup" defaultValue="1" accessibilityLabel="pick a size">
                     <Stack direction={{
                     base: "column",
                     md: "row"
                     }} alignItems="center" space={2} w="75%" maxW="300px">
-                        <Radio value={true} colorScheme="green" size="sm" my={1} >
+                        <Radio value="Publico" colorScheme="green" size="sm" my={1}>
                             Publico
                         </Radio>
-                        <Radio value={false} colorScheme="green" size="sm" my={1} on>
+                        <Radio value="Privado" colorScheme="green" size="sm" my={1}>
                             Privado
                         </Radio>
-                    </Stack >
-                </Radio.Group>
+                    </Stack>
+                    </Radio.Group>
                 </FormControl>
-                { value === false ? (
-                    <FormControl>
+                <FormControl>
                     <FormControl.Label>Contraseña Grupo</FormControl.Label>
-                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.Contraseña_Grupo}</Text>
-                    <Input 
-                        type="password"
-                        value={formik.values.Contraseña_Grupo}
-                        onChangeText={(text) => formik.setFieldValue("Contraseña_Grupo", text)} 
-                    />
-                </FormControl> 
-                ): (
-                    console.log('')
-                ) 
-                }
+                    <Input type="password"/>
+                </FormControl>
                 <FormControl>
                     <FormControl.Label>Descripción</FormControl.Label>
-                    <Text fontSize={"12"} color={"danger.500"}>{formik.errors.Descripcion}</Text>
-                    <TextArea 
-                        h={150} placeholder="Descrición del Grupo" width={275} 
-                        value={formik.values.Descripcion}
-                        onChangeText={(text) => formik.setFieldValue("Descripcion", text)} 
-                    />
+                    <TextArea h={150} placeholder="Descrición del Grupo" width={275} />
                 </FormControl>
-                <Button mt="2" colorScheme="indigo" onPress={() => formik.handleSubmit()}>
+                <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('Grupos')}>
                     Crear grupo
                 </Button>
                 </VStack>
@@ -122,22 +47,5 @@ function CrearGrupoScreen ({navigation}) {
     )
 }
 
-function initialValues(){
-
-    return {
-        Nombre_Grupo: "",
-        Descripcion: "",
-        Visibilidad: "",
-        Contraseña_Grupo: "",
-    }
-}
-
-function validationSchema(){
-    return {
-        Nombre_Grupo: Yup.string().required('Este campo es requerido'),
-        Descripcion: Yup.string().required('Este campo es requerido'),
-        Visibilidad: Yup.string().required('Este campo es requerido'),
-    }
-}
 
 export default  CrearGrupoScreen

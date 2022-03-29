@@ -13,6 +13,7 @@ import CrearGrupoScreen from './src/screens/CrearGrupoScreen';
 import ReporteScreen from './src/screens/ReporteScreen';
 import CrearReporteScreen from './src/screens/CrearReporteScreen';
 import TimePicker from './src/components/TimePicker';
+import GruposScreen from './src/screens/GruposScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -71,8 +72,12 @@ function App () {
             /> 
             <Stack.Screen
               name="Grupos"
-              component={GrupoScreen}
+              component={GruposScreen}
             />  
+            <Stack.Screen
+              name="Mis Grupos"
+              component={GrupoScreen}
+            /> 
             <Stack.Screen
               name="Reportes"
               component={ReporteScreen}

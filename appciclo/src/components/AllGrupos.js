@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     }
 });
 
-class GrupoC extends Component {  
+class GrupoTodos extends Component {  
 
     state = {
         grupos: []
@@ -70,4 +70,4 @@ class GrupoC extends Component {
 }
 }
 
-export default GrupoC
+export default GrupoTodos

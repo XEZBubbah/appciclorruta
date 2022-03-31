@@ -2,6 +2,7 @@ import React from "react";
 import { View, Button } from "react-native";
 import GrupoC from "../components/Grupo";
 
+
 function  GrupoScreen ({navigation}) {
 
     return (

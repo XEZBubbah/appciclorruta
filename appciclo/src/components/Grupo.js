@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
 const styles = StyleSheet.create({
@@ -22,9 +22,10 @@ export default function GrupoC (){
     const [state, setState] = useState({
         gruposUsuario: []
     })
+    const { auth } = useAuth();
 
     useEffect( async () => {
-        const value = await AsyncStorage.getItem('UserName');
+        const value = auth.userName;
         console.log('Hola '+ value)
         axios.post('http://192.168.1.6:5000/groupM/fetchUserGroupMov', {Usuario: value})
         .then(response => {

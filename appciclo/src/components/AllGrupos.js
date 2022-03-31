@@ -1,7 +1,6 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 
 const styles = StyleSheet.create({
@@ -16,38 +15,36 @@ const styles = StyleSheet.create({
     }
 });
 
-class GrupoTodos extends Component {  
+export default function GrupoTodos() {  
 
-    state = {
+    const [state, setState] = useState({
         grupos: []
-    }
+    })
 
-    componentDidMount() {
-
+    useEffect( async () => {
         axios.post('http://192.168.1.6:5000/groupM/fetchGroupMov', )
         .then(response => {
             console.log(response.data.result)
-            this.setState({
+            setState({
                 grupos: response.data.result
             })
         })
         .catch(error => {
             console.log(error);
         });
-    }
+    }, []);
 
-    render(){
     return (
         <View>
             { 
-            this.state.grupos.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
+            state.grupos.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
             (<ScrollView
                 horizontal= {false}
                 showsVerticalScrollIndicator={false}
                 style= {{height: 630}}
             >
                 {
-                    this.state.grupos.map((grupos, index) => (
+                    state.grupos.map((grupos, index) => (
                     <View key={index}>
                     <NativeBaseProvider>
                         <Center padding={2}>
@@ -82,6 +79,4 @@ class GrupoTodos extends Component {
         </View>
     )
 }
-}
 
-export default GrupoTodos

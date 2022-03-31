@@ -1,15 +1,17 @@
-import * as React from "react";
+import React , { useState } from "react";
+import useAuth from "../hooks/useAuth";
 import { Image } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text} from 'native-base'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
 
-function LoginScreen ({navigation}) {
+export default function LoginScreen ({navigation}) {
 
-    const [name, setName] = React.useState('');
+    const { login } = useAuth();
+
+    console.log(useAuth());
 
     const onLogin = () => {
         navigation.navigate('Menú Usuario')
@@ -22,9 +24,8 @@ function LoginScreen ({navigation}) {
         onSubmit: async (formValue) => {
             try {
                 console.log(formValue);
-                setName(formValue.userName);
+                login(formValue);
                 console.log('Soy: '+formValue.userName);
-                await AsyncStorage.setItem('UserName', name);
                 const {data} = await axios.post('http://192.168.1.6:5000/userM/signinMov', {...formValue});
                 console.log ("Datos enviados ..");
                 onLogin();
@@ -86,7 +87,6 @@ function LoginScreen ({navigation}) {
                 
                 <Button mt="2" colorScheme="indigo" onPress={() =>   
                     {
-                        setName(formik.values.userName); 
                         formik.handleSubmit();
                     }
                 }
@@ -130,5 +130,3 @@ function validationSchema(){
     }
 }
 
-
-export default LoginScreen

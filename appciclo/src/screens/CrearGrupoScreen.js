@@ -1,32 +1,15 @@
-import React , { useEffect, navigation } from 'react';
+import React , { useState ,useEffect, navigation } from 'react';
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack, Text} from 'native-base';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useAuth from "../hooks/useAuth";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
 
 function CrearGrupoScreen ({navigation}) {
-    const [name, setName] = React.useState('');
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const getData = () => {
-        try {
-            AsyncStorage.getItem('UserName')
-                .then(value =>{
-                    if (value != null){
-                        setName(value)
-                    }
-                })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const [value, setValue] = React.useState('');
+    
+    const {auth} = useAuth();
+    const [value, setValue] = useState('');
 
     const onGrupo = () => {
         navigation.navigate('Menú Usuario')
@@ -38,7 +21,7 @@ function CrearGrupoScreen ({navigation}) {
         validateOnChange: false,
         onSubmit: async (formValue) => {
             try {
-                var Usuario = name;
+                const Usuario = auth.userName;
                 console.log(formValue);
                 console.log('Soy '+ Usuario);
                 const {data} = await axios.post('http://192.168.1.6:5000/groupM/createGroupMov', {...formValue, Usuario});

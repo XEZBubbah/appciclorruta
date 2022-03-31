@@ -1,4 +1,4 @@
-import * as React from "react";
+import React , { useEffect, navigation } from 'react';
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack, Text} from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFormik } from 'formik';
@@ -9,7 +9,7 @@ import axios from "axios";
 function CrearGrupoScreen ({navigation}) {
     const [name, setName] = React.useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
         getData();
     }, []);
 
@@ -29,7 +29,7 @@ function CrearGrupoScreen ({navigation}) {
     const [value, setValue] = React.useState('');
 
     const onGrupo = () => {
-        navigation.navigate('Grupos')
+        navigation.navigate('Menú Usuario')
     };
 
     const formik = useFormik({

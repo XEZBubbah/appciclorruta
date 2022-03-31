@@ -21,6 +21,7 @@ class News extends Component {
     state = {
         news: []
     }
+    
     componentDidMount() {
         fetch(
             `https://newsapi.org/v2/everything?qInTitle=ciclismo&language=es&apiKey=${API_KEY}`,

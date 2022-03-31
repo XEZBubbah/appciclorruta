@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,24 +16,39 @@ const styles = StyleSheet.create({
     }
 });
 
-class GrupoC extends Component {  
 
-    state = {
-        grupos: []
-    }
+export default function GrupoC (){  
 
-    render(){
+    const [state, setState] = useState({
+        gruposUsuario: []
+    })
+
+    useEffect( async () => {
+        const value = await AsyncStorage.getItem('UserName');
+        console.log('Hola '+ value)
+        axios.post('http://192.168.1.6:5000/groupM/fetchUserGroupMov', {Usuario: value})
+        .then(response => {
+            console.log(response.data.result)
+            setState({
+                gruposUsuario: response.data.result
+            })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }, []);
+
     return (
         <View>
             { 
-            this.state.grupos.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
+            state.gruposUsuario.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
             (<ScrollView
                 horizontal= {false}
                 showsVerticalScrollIndicator={false}
                 style= {{height: 630}}
             >
                 {
-                    this.state.grupos.map((grupos, index) => (
+                    state.gruposUsuario.map((gruposUsuario, index) => (
                     <View key={index}>
                     <NativeBaseProvider>
                         <Center padding={2}>
@@ -41,19 +56,19 @@ class GrupoC extends Component {
                         <Pressable onPress={() => console.log("I'm Pressed")}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-                            {grupos.nombre} 
+                            {gruposUsuario.Nombre_Grupo} 
                         </Text>
                         <Divider my={3}></Divider>
                         <HStack alignItems="center">
                             <Badge colorScheme="darkBlue" width={100} _text={{
                             color: "white"
                             }} variant="solid" rounded="4">
-                            <Text color={"white"}>{grupos.visibilidad}</Text>
+                            <Text color={"white"}>{gruposUsuario.Visibilidad}</Text>
                             </Badge>
                             <Spacer />
                         </HStack>
                         <Text mt="2" fontSize="sm" color="coolGray.700">
-                            {grupos.descripcion}
+                            {gruposUsuario.Descripcion}
                         </Text>
                         </Box>
                         </Pressable>
@@ -68,6 +83,4 @@ class GrupoC extends Component {
         </View>
     )
 }
-}
 
-export default GrupoC

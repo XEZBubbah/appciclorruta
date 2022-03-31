@@ -29,7 +29,7 @@ export default function EliminarCuenta ({navigation}){
             {
                 validar === true ? (
                     console.log('Proceso de eliminar'),
-                    logout,
+                    logout(),
                     eliminado()
                 ): (
                     console.log('Operación cancelada')

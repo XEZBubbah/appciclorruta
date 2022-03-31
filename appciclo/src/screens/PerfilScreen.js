@@ -28,7 +28,15 @@ function  PerfilScreen ({navigation}) {
                 onPress={() => navigation.navigate('Eliminar Cuenta')}>
                 Eliminar Cuenta
         </Link>
-        <Divider my={4}></Divider>
+        <Link _text={{
+            fontSize: "sm",
+            fontWeight: "500",
+            color: "indigo.500"
+            }}
+                onPress={() => navigation.navigate('Editar Cuenta')}>
+                Editar Usuario
+        </Link>
+        <Divider my={2}></Divider>
         <Box backgroundColor={"blue.300"} w={340}>
             <Center>
                 <Heading size='md'>Grupos</Heading>

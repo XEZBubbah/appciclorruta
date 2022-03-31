@@ -1,4 +1,4 @@
-import React , { useState ,useEffect, navigation } from 'react';
+import React , { useState } from 'react';
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack, Text} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import { useFormik } from 'formik';
@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import axios from "axios";
 
 
-function CrearGrupoScreen ({navigation}) {
+export default function CrearGrupoScreen ({navigation}) {
     
     const {auth} = useAuth();
     const [value, setValue] = useState('');
@@ -122,5 +122,3 @@ function validationSchema(){
         Visibilidad: Yup.string().required('Este campo es requerido'),
     }
 }
-
-export default  CrearGrupoScreen

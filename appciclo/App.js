@@ -14,6 +14,7 @@ import ReporteScreen from './src/screens/ReporteScreen';
 import CrearReporteScreen from './src/screens/CrearReporteScreen';
 import TimePicker from './src/components/TimePicker';
 import GruposScreen from './src/screens/GruposScreen';
+import EliminarCuenta from './src/screens/EliminarCuentaScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -91,6 +92,10 @@ function App () {
             <Stack.Screen
               name="Time"
               component={TimePicker}
+            /> 
+            <Stack.Screen
+              name="Eliminar Cuenta"
+              component={EliminarCuenta}
             /> 
           </Stack.Navigator>
           </AuthProvider>

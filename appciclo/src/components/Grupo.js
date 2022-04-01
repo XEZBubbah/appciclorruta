@@ -4,6 +4,7 @@ import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badg
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,

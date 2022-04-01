@@ -8,6 +8,10 @@ function CambioContraScreen({navigation}) {
             <Center w="100%">
                 <Box safeArea p="2" py="8" w="90%" maxW="290">
                 <VStack space={3} mt="5">
+                <FormControl>
+                        <FormControl.Label>Contraseña Actual</FormControl.Label>
+                        <Input type="password"/>
+                    </FormControl>
                     <FormControl>
                         <FormControl.Label>Ingresa la nueva Contraseña</FormControl.Label>
                         <Input type="password"/>

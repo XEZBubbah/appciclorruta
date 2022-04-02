@@ -81,7 +81,7 @@ export default function CrearGrupoScreen ({navigation}) {
                         value={formik.values.Contraseña_Grupo}
                         onChangeText={(text) => formik.setFieldValue("Contraseña_Grupo", text)} 
                     />
-                </FormControl> 
+                    </FormControl> 
                 ): (
                     console.log('')
                 ) 

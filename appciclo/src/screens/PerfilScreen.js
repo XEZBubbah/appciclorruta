@@ -48,16 +48,16 @@ export default function  PerfilScreen ({navigation}) {
             fontWeight: "500",
             color: "indigo.500"
             }}
-                onPress={() => navigation.navigate('Eliminar Cuenta')}>
-                Eliminar Cuenta
+                onPress={() => navigation.navigate('Editar Cuenta')}>
+                Editar Usuario
         </Link>
         <Link _text={{
             fontSize: "sm",
             fontWeight: "500",
             color: "indigo.500"
             }}
-                onPress={() => navigation.navigate('Editar Cuenta')}>
-                Editar Usuario
+                onPress={() => navigation.navigate('Eliminar Cuenta')}>
+                Eliminar Cuenta
         </Link>
         <Divider my={2}></Divider>
         <Box backgroundColor={"blue.300"} w={340}>

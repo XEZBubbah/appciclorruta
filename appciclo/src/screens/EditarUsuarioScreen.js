@@ -1,25 +1,36 @@
-import * as React from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Stack, Checkbox} from 'native-base'
-import { useState } from 'react'
+import React, { useState } from "react";
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Stack, Checkbox} from 'native-base';
 import { useFormik }  from 'formik';
-import * as Yup from 'yup';
+import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
 
 export default function EditarUsuario ({navigation}) {
     
+        const { auth,logout } = useAuth();
+        const [ checkUsername, setcheckUsername ] = useState(false);
+        const [ checkEmail, setcheckEmail ] = useState(false);
+        const [ checkPhone, setcheckPhone  ] = useState(false);
+
         const onUpdate = () => {
-            navigation.navigate('Perfil')
+            logout()
+            navigation.navigate('Login')
         };
+
         const formik = useFormik({
             initialValues: initialValues(),
-            validationSchema: Yup.object(validationSchema()),
             validateOnChange: false,
             onSubmit: async (formValue) => {
                 try {
-                    console.log(formValue);
-                    const {data} = await axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue, birthDate});
-                    console.log ("Datos enviados ..");
+                    var userNameOld = auth.userName;
+                    console.log(formValue +" "+userNameOld);
+                    const {data} = await axios.post('http://192.168.1.6:5000/userM/modifyUserInfo', {...formValue, userNameOld});
+                    console.log ("Datos enviados .." + Object.values(data));
+                    var error = Object.values(data)
+                    console.log(typeof error)
+                    if(error != ''){
+                        console.log('Error: '+error)
+                    }
                     onUpdate();
                 } 
                 catch (error) {
@@ -37,13 +48,13 @@ export default function EditarUsuario ({navigation}) {
             base: "row",
             md: "row" 
             }} space={2} alignItems="flex-start">
-                <Checkbox value="purple" colorScheme="danger" >
+                <Checkbox value="purple" colorScheme="danger" isChecked={checkUsername} onChange={() => setcheckUsername(!checkUsername)} >
                     Username
                 </Checkbox>
-                <Checkbox value="purple" colorScheme="purple" >
+                <Checkbox value="purple" colorScheme="purple" isChecked={checkEmail} onChange={() => setcheckEmail(!checkEmail)}>
                     Email
                 </Checkbox>
-                <Checkbox value="purple" colorScheme="orange" >
+                <Checkbox value="purple" colorScheme="orange" isChecked={checkPhone} onChange={() => setcheckPhone(!checkPhone)}>
                     Número Celular
                 </Checkbox>
             </Stack>
@@ -51,32 +62,47 @@ export default function EditarUsuario ({navigation}) {
         <Center w="100%">
             <Box safeArea p="2" w="90%" maxW="290">
                 <VStack space={3} mt="5">
-                <FormControl>
-                    <FormControl.Label>Username</FormControl.Label>
-                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.userName}</Text>
-                    <Input 
-                        autoCapitalize="none"
-                        value={formik.values.userName}
-                        onChangeText={(text) => formik.setFieldValue("userName", text)} 
-                    />
-                </FormControl>
-                <FormControl>
+                {
+                    checkUsername === true ? (
+                        <FormControl>
+                        <FormControl.Label>Username</FormControl.Label>
+                        <Input 
+                            autoCapitalize="none"
+                            value={formik.values.userNameNew}
+                            onChangeText={(text) => formik.setFieldValue("userNameNew", text)} 
+                        />
+                        </FormControl>
+                    ) : (
+                        console.log('Hola :)')
+                    )
+                }
+                {
+                    checkEmail === true ? (
+                    <FormControl>
                     <FormControl.Label>Email</FormControl.Label>
-                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.email}</Text>
-                    <Input 
-                        value={formik.values.email}
-                        onChangeText={(text) => formik.setFieldValue("email", text)}
-                    />
-                </FormControl>
-                <FormControl>
-                    <FormControl.Label>Número Celular</FormControl.Label>
-                    <Text fontSize={"10"} color={"danger.500"}>{formik.errors.phone}</Text>
-                    <Input 
-                        value={formik.values.phone}
-                        onChangeText={(text) => formik.setFieldValue("phone", text)}
-                    />
-                </FormControl>
-                <Button mt="2" colorScheme="indigo" onPress={() => 
+                        <Input 
+                            value={formik.values.email}
+                            onChangeText={(text) => formik.setFieldValue("email", text)}
+                        />
+                    </FormControl>
+                    ): (
+                        console.log('Sayonaraaaa ...')
+                    )
+                }
+                {
+                    checkPhone === true ? (
+                    <FormControl>
+                        <FormControl.Label>Número Celular</FormControl.Label>
+                        <Input 
+                            value={formik.values.phone}
+                            onChangeText={(text) => formik.setFieldValue("phone", text)}
+                        />
+                    </FormControl>
+                    ):(
+                        console.log('Abrigadhooo ...')
+                    )
+                }
+                <Button mt="2" colorScheme="indigo" onPress={() =>
                     formik.handleSubmit()
                 }>
                     Editar Cuenta
@@ -89,23 +115,11 @@ export default function EditarUsuario ({navigation}) {
     )
 }
 
-
 function initialValues(){
     return {
-        firstName: "", 
-        lastName: "",
-        userName: "",
+        userNameNew: "",
         phone: "",
         email: "", 
     }
 }
 
-function validationSchema(){
-    return {
-        firstName: Yup.string().required("Este campo no se puede dejar vacio"),
-        lastName: Yup.string().required("Este campo no se puede dejar vacio"),
-        userName: Yup.string().required("Este campo no se puede dejar vacio"),
-        phone: Yup.number().required("Este campo no se puede dejar vacio"),
-        email: Yup.string().required("Ingrese un email").email("Email invalido"),
-    }
-}

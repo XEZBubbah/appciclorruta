@@ -60,7 +60,7 @@ function DatePickerComp() {
     );
 };
 
-function CrearUsuaScreen ({navigation}) {
+export default function CrearUsuaScreen ({navigation}) {
     
         const onSingup = () => {
             navigation.navigate('Login')
@@ -196,6 +196,3 @@ function validationSchema(){
         password: Yup.string().required("Ingrese una contraseña")
     }
 }
-
-
-export default  CrearUsuaScreen

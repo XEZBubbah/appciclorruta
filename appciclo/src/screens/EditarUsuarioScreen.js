@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Stack, Checkbox} from 'native-base';
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, ScrollView, Stack, Checkbox, Text} from 'native-base';
 import { useFormik }  from 'formik';
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+
 
 
 export default function EditarUsuario ({navigation}) {
@@ -11,6 +12,7 @@ export default function EditarUsuario ({navigation}) {
         const [ checkUsername, setcheckUsername ] = useState(false);
         const [ checkEmail, setcheckEmail ] = useState(false);
         const [ checkPhone, setcheckPhone  ] = useState(false);
+        const [ error, setError ] = useState('');
 
         const onUpdate = () => {
             logout()
@@ -23,15 +25,14 @@ export default function EditarUsuario ({navigation}) {
             onSubmit: async (formValue) => {
                 try {
                     var userNameOld = auth.userName;
-                    console.log(formValue +" "+userNameOld);
                     const {data} = await axios.post('http://192.168.1.6:5000/userM/modifyUserInfo', {...formValue, userNameOld});
                     console.log ("Datos enviados .." + Object.values(data));
-                    var error = Object.values(data)
-                    console.log(typeof error)
-                    if(error != ''){
-                        console.log('Error: '+error)
+                    setError(Object.values(data));
+                    if(error === ''){
+                        onUpdate();
+                    }else{
+                        console.log('Error: '+error);
                     }
-                    onUpdate();
                 } 
                 catch (error) {
                     console.log(error)
@@ -107,6 +108,7 @@ export default function EditarUsuario ({navigation}) {
                 }>
                     Editar Cuenta
                 </Button>
+                <Text fontSize={"12"} color={"danger.500"}>{error}</Text>
                 </VStack>
             </Box>
         </Center>

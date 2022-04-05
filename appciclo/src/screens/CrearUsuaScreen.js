@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView} from 'native-base'
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Image, Spacer,Divider} from 'native-base'
 import { useState } from 'react'
 import { View } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
+import * as ImagePicker from 'expo-image-picker';
 
 let fecha = "";
 
@@ -14,8 +15,7 @@ function DatePickerComp() {
     const [date, setDate] = useState(new Date());
     const [text, setText] = useState('Empty');
     const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-    
+    const [show, setShow] = useState(false); 
   
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate;
@@ -61,14 +61,32 @@ function DatePickerComp() {
 };
 
 export default function CrearUsuaScreen ({navigation}) {
+
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+      // No permissions request is necessary for launching the image library
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      console.log(result);
+  
+      if (!result.cancelled) {
+        setImage(result.uri);
+      }
+    };
     
-        const onSingup = () => {
-            navigation.navigate('Login')
-        };
-        const formik = useFormik({
-            initialValues: initialValues(),
-            validationSchema: Yup.object(validationSchema()),
-            validateOnChange: false,
+    const onSingup = () => {
+        navigation.navigate('Login')
+    };
+    const formik = useFormik({
+        initialValues: initialValues(),
+        validationSchema: Yup.object(validationSchema()),
+        validateOnChange: false,
             onSubmit: async (formValue) => {
                 try {
                     var birthDate = fecha;
@@ -147,6 +165,15 @@ export default function CrearUsuaScreen ({navigation}) {
                         onChangeText={(text) => formik.setFieldValue("password", text)}    
                     />
                 </FormControl>
+                <Divider my={3}/>
+                <FormControl>
+                    <Button onPress={pickImage} > Imagen de Perfil </Button>
+                    <Divider my={3}/>
+                    <Center>
+                        {image && <Image alt="fotoPerfil" source={{ uri: image }} style={{ width: 200, height: 200, borderRadius: 20 }} />}
+                    </Center>
+                </FormControl>
+
                 <Button mt="2" colorScheme="indigo" onPress={() => 
                     formik.handleSubmit()
                 }>

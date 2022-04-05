@@ -14,7 +14,7 @@ export default function  PerfilScreen ({navigation}) {
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post('http://192.168.1.6:5000/userM/fetchUserInfo', {Usuario: value})
+        axios.post('http://192.168.1.7:5000/userM/fetchUserInfo', {Usuario: value})
         .then(response => {
             console.log(response.data.result)
             setState({

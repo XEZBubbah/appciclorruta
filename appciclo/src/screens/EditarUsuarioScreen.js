@@ -25,13 +25,14 @@ export default function EditarUsuario ({navigation}) {
             onSubmit: async (formValue) => {
                 try {
                     var userNameOld = auth.userName;
-                    const {data} = await axios.post('http://192.168.1.6:5000/userM/modifyUserInfo', {...formValue, userNameOld});
+                    const {data} = await axios.post('http://192.168.1.7:5000/userM/modifyUserInfo', {...formValue, userNameOld});
                     console.log ("Datos enviados .." + Object.values(data));
                     setError(Object.values(data));
                     if(error === ''){
                         onUpdate();
                     }else{
                         console.log('Error: '+error);
+                        alert(error);
                     }
                 } 
                 catch (error) {

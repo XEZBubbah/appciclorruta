@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
 import useAuth from "../hooks/useAuth";
@@ -20,6 +21,8 @@ const styles = StyleSheet.create({
 
 export default function GrupoC (){  
 
+    const navigation = useNavigation()
+
     const [state, setState] = useState({
         gruposUsuario: []
     })
@@ -28,7 +31,7 @@ export default function GrupoC (){
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post('http://192.168.1.6:5000/groupM/fetchUserGroupMov', {Usuario: value})
+        axios.post('http://192.168.1.7:5000/groupM/fetchUserGroupMov', {Usuario: value})
         .then(response => {
             console.log(response.data.result)
             setState({
@@ -55,7 +58,7 @@ export default function GrupoC (){
                     <NativeBaseProvider>
                         <Center padding={2}>
                         <Box alignItems="center">
-                        <Pressable onPress={() => console.log("I'm Pressed")}>
+                        <Pressable onPress={() => navigation.navigate('Chat Grupo')}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
                             {gruposUsuario.Nombre_Grupo} 

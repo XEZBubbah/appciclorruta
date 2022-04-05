@@ -26,7 +26,7 @@ export default function LoginScreen ({navigation}) {
                 console.log(formValue);
                 login(formValue);
                 console.log('Soy: '+formValue.userName);
-                const {data} = await axios.post('http://192.168.1.6:5000/userM/signinMov', {...formValue});
+                const {data} = await axios.post('http://192.168.1.7:5000/userM/signinMov', {...formValue});
                 console.log ("Datos enviados ..");
                 onLogin();
             }       

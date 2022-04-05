@@ -74,7 +74,7 @@ export default function CrearUsuaScreen ({navigation}) {
                     var birthDate = fecha;
                     console.log('Entre: ' +birthDate);
                     console.log(formValue);
-                    const {data} = await axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue, birthDate});
+                    const {data} = await axios.post('http://192.168.1.7:5000/userM/signupMov', {...formValue, birthDate});
                     console.log ("Datos enviados ..");
                     onSingup();
                 }

@@ -16,6 +16,7 @@ import TimePicker from './src/components/TimePicker';
 import GruposScreen from './src/screens/GruposScreen';
 import EliminarCuenta from './src/screens/EliminarCuentaScreen';
 import EditarUsuario from './src/screens/EditarUsuarioScreen';
+import ChatGrupo from './src/screens/ChatGrupoScreen';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -47,12 +48,12 @@ function App () {
               component={RecuperarContScreen}
             />
             <Stack.Screen
-              name="Map View"
-              component={MapScreen}
-            />
-            <Stack.Screen
               name="Cambiar Contraseña"
               component={CambioContraScreen}
+            />
+            <Stack.Screen
+              name="Map View"
+              component={MapScreen}
             />
             <Stack.Screen
               name="Noticias"
@@ -83,6 +84,10 @@ function App () {
               component={GrupoScreen}
             /> 
             <Stack.Screen
+              name="Chat Grupo"
+              component={ChatGrupo}
+            /> 
+            <Stack.Screen
               name="Reportes"
               component={ReporteScreen}
             /> 
@@ -102,6 +107,7 @@ function App () {
               name="Editar Cuenta"
               component={EditarUsuario}
             /> 
+
           </Stack.Navigator>
           </AuthProvider>
         </NavigationContainer>

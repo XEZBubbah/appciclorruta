@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Alert } from "react-native";
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, ScrollView, Stack, Checkbox, Text} from 'native-base';
 import { useFormik }  from 'formik';
 import useAuth from "../hooks/useAuth";
@@ -32,7 +33,15 @@ export default function EditarUsuario ({navigation}) {
                         onUpdate();
                     }else{
                         console.log('Error: '+error);
-                        alert(error);
+                        Alert.alert(
+                            error,
+                            [
+                                {
+                                    text: "Ok",
+                                    onPress: () => console.log("Ok pressed")
+                                }
+                            ]
+                        );
                     }
                 } 
                 catch (error) {

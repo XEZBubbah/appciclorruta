@@ -8,3 +8,4 @@ export const fetchGroupMov = (formData) => API.post('/groupM/fetchGroupMov', for
 export const fetchUserGroupMov = (formData) => API.post('/groupM/fetchUserGroupMov', formData);
 export const fetchUserInfo = (formData) => API.post('/userM/fetchUserInfo', formData);
 export const modifyUserInfo = (formData) => API.post('/userM/modifyUserInfo', formData);
+export const deleteUser = (formData) => API.post('/userM/deleteUserAccount', formData);

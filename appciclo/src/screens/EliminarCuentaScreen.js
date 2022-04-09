@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import { Text, Center, NativeBaseProvider, Button, HStack} from 'native-base';
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 export default function EliminarCuenta ({navigation}){
 
-    const {logout} = useAuth('');
+    const { auth,logout} = useAuth('');
 
-    const [validar, setValidar] = useState(false);
-    console.log(validar)
-
-    const eliminado = () => {
+    function salir() {
+        console.log('Saliendo ...')
+        logout()
         navigation.navigate('Login')
+    }
+
+    async function eliminar () {
+        var value = auth.userName 
+        console.log('Soy: '+ value)
+        axios.post('http://192.168.1.6:5000/userM/deleteUserAccount', {Usuario: value})
+        .then(response => {
+            console.log(response.data);
+            salir();
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return(
@@ -19,22 +32,13 @@ export default function EliminarCuenta ({navigation}){
                 <Text p={10}>¿Seguro que desea eliminar su cuenta?</Text>
                 <HStack>
                     <Button marginRight={5}  onPress={() => {
-                        setValidar(true)
+                        eliminar()
                     }}>Aceptar</Button>
                     <Button onPress={() => {
                         navigation.navigate('Perfil')
                     }}>Cancelar</Button>
                 </HStack>
             </Center>
-            {
-                validar === true ? (
-                    console.log('Proceso de eliminar'),
-                    logout(),
-                    eliminado()
-                ): (
-                    console.log('Operación cancelada')
-                )
-            }
         </NativeBaseProvider>
     )
 }

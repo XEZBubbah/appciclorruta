@@ -13,40 +13,38 @@ export default function EditarUsuario ({navigation}) {
         const [ checkUsername, setcheckUsername ] = useState(false);
         const [ checkEmail, setcheckEmail ] = useState(false);
         const [ checkPhone, setcheckPhone  ] = useState(false);
-        const [ error, setError ] = useState('');
 
         const onUpdate = () => {
             logout()
             navigation.navigate('Login')
-        };
+        }
+
+        function asingError(err){
+            Alert.alert(
+                'Tenemos un problema', 
+                `${err}`,
+                [
+                    {text: 'Ok'}
+                ]
+            );
+        }
 
         const formik = useFormik({
             initialValues: initialValues(),
             validateOnChange: false,
             onSubmit: async (formValue) => {
-                try {
-                    var userNameOld = auth.userName;
-                    const {data} = await axios.post('http://192.168.1.6:5000/userM/modifyUserInfo', {...formValue, userNameOld});
-                    console.log ("Datos enviados .." + Object.values(data));
-                    setError(Object.values(data));
-                    if(error === ''){
-                        onUpdate();
-                    }else{
-                        console.log('Error: '+error);
-                        Alert.alert(
-                            error,
-                            [
-                                {
-                                    text: "Ok",
-                                    onPress: () => console.log("Ok pressed")
-                                }
-                            ]
-                        );
-                    }
-                } 
-                catch (error) {
-                    console.log(error)
+                var userNameOld = auth.userName;
+                axios.post('http://192.168.1.6:5000/userM/modifyUserInfo', {...formValue, userNameOld})
+                .then(function(response){
+                    console.log(response.data.message);
+                    onUpdate();
                 }
+                ).catch(function(e){
+                    var err = Object.values(e.response.data)[0];
+                    console.log(err);
+                    console.log(typeof err);
+                    asingError(err);
+                })
             },
         });
 
@@ -118,7 +116,6 @@ export default function EditarUsuario ({navigation}) {
                 }>
                     Editar Cuenta
                 </Button>
-                <Text fontSize={"12"} color={"danger.500"}>{error}</Text>
                 </VStack>
             </Box>
         </Center>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, Center, NativeBaseProvider, Button, HStack} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import axios from "axios";

@@ -1,4 +1,5 @@
 import React , { useState } from 'react';
+import { Alert } from 'react-native';
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack, Text} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import { useFormik } from 'formik';
@@ -13,25 +14,38 @@ export default function CrearGrupoScreen ({navigation}) {
 
     const onGrupo = () => {
         navigation.navigate('Menú Usuario')
-    };
+    }
+
+    function asingError(err){
+        Alert.alert(
+            'Tenemos un problema', 
+            `${err}`,
+            [
+                {text: 'Ok'}
+            ]
+        );
+    }
 
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         validateOnChange: false,
         onSubmit: async (formValue) => {
-            try {
-                const Usuario = auth.userName;
-                console.log(formValue);
-                console.log('Soy '+ Usuario);
-                const {data} = await axios.post('http://192.168.1.6:5000/groupM/createGroupMov', {...formValue, Usuario});
-                console.log ("Datos enviados ..");
+            const Usuario = auth.userName;
+            console.log(formValue);
+            console.log('Soy '+ Usuario);
+            axios.post('http://192.168.1.6:5000/groupM/createGroupMov', {...formValue, Usuario})
+            .then(function(response){
+                console.log (response.data.message);
                 onGrupo();
-            }       
-            catch (error) {
-                console.log(error)
-            }
-        },
+            }).catch(function(e){
+                var err = Object.values(e.response.data)[0];
+                console.log(err);
+                console.log(typeof err);
+                asingError(err);
+            })
+        }       
+
     });
 
     return (

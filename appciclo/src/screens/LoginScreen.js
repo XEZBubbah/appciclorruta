@@ -1,6 +1,6 @@
 import React , { useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { Image } from "react-native";
+import { Image, Alert } from "react-native";
 import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text} from 'native-base'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -10,9 +10,19 @@ import axios from "axios";
 export default function LoginScreen ({navigation}) {
 
     const { login } = useAuth();
+    var respuesta = '';
 
-    console.log(useAuth());
-
+    function asingError(err){
+        respuesta = err;
+        Alert.alert(
+            'Tenemos un problema', 
+            `${respuesta}`,
+            [
+                {text: 'Ok'}
+            ]
+        );
+    }
+    
     const onLogin = () => {
         navigation.navigate('Menú Usuario')
     };
@@ -22,19 +32,22 @@ export default function LoginScreen ({navigation}) {
         validationSchema: Yup.object(validationSchema()),
         validateOnChange: false,
         onSubmit: async (formValue) => {
-            try {
-                console.log(formValue);
                 login(formValue);
                 console.log('Soy: '+formValue.userName);
-                const {data} = await axios.post('http://192.168.1.6:5000/userM/signinMov', {...formValue});
-                console.log ("Datos enviados ..");
-                onLogin();
+                axios.post('http://192.168.1.6:5000/userM/signinMov', {...formValue})
+                .then(function(response){
+                    console.log ("Datos enviados .. ");
+                    onLogin();  
+                }).catch(function(error){
+                    var err = Object.values(error.response.data)[0];
+                    console.log(err);
+                    console.log(typeof err);
+                    asingError(err);
+                });
+
             }       
-            catch (error) {
-                console.log(error)
-            }
         },
-    });
+    );
 
     return (
         <NativeBaseProvider>
@@ -97,7 +110,7 @@ export default function LoginScreen ({navigation}) {
                 <HStack mt="6" justifyContent="center">
                     <Text fontSize="sm" color="coolGray.600" _dark={{
                     color: "warmGray.200"
-                }}>
+                    }}>
                     Soy nuevo usuario.{" "}
                     </Text>
                     <Link _text={{

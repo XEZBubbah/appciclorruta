@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Image, Spacer,Divider} from 'native-base'
+import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Image ,Divider} from 'native-base'
 import { useState } from 'react'
 import { View } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -83,24 +83,34 @@ export default function CrearUsuaScreen ({navigation}) {
     const onSingup = () => {
         navigation.navigate('Login')
     };
+
+    function asingError(err){
+        Alert.alert(
+            'Tenemos un problema', 
+            `${err}`,
+            [
+                {text: 'Ok'}
+            ]
+        );
+    }
+
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         validateOnChange: false,
             onSubmit: async (formValue) => {
-                try {
-                    var birthDate = fecha;
-                    console.log('Entre: ' +birthDate);
-                    console.log(formValue);
-                    const {data} = await axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue, birthDate});
-                    console.log ("Datos enviados ..");
+                var birthDate = fecha;
+                console.log('Entre: ' +birthDate);
+                console.log(formValue);
+                axios.post('http://192.168.1.6:5000/userM/signupMov', {...formValue, birthDate})
+                .then(function(response){
+                    console.log (response.data.message);
                     onSingup();
-                }
-                
-                catch (error) {
-                    console.log(error)
-                }
-            },
+                }).catch(function(e){
+                    var err = Object.values(e.response.data)[0];
+                    asingError(err);
+                })
+            }
         });
 
     return (

@@ -40,8 +40,6 @@ export default function CrearGrupoScreen ({navigation}) {
                 onGrupo();
             }).catch(function(e){
                 var err = Object.values(e.response.data)[0];
-                console.log(err);
-                console.log(typeof err);
                 asingError(err);
             })
         }       
@@ -80,7 +78,7 @@ export default function CrearGrupoScreen ({navigation}) {
                         <Radio value={true} colorScheme="green" size="sm" my={1} >
                             Publico
                         </Radio>
-                        <Radio value={false} colorScheme="green" size="sm" my={1} on>
+                        <Radio value={false} colorScheme="green" size="sm" my={1} >
                             Privado
                         </Radio>
                     </Stack >

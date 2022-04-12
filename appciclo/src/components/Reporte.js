@@ -1,6 +1,8 @@
-import React, {Component} from "react";
+import React, {useState, useEffect} from "react";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 
 const styles = StyleSheet.create({
@@ -15,44 +17,39 @@ const styles = StyleSheet.create({
     }
 });
 
-class ReporteC extends Component {
+export default function ReporteC () {
 
-    state = {
-        reportes: [
-            {
-                "nombre": "Reporte 1", 
-                "descripcion": "Grupo para jaksdsakbd kanskdbwwqug a d.snkjashsabsa ñlkoopre",
-                "fecha":"Fecha", 
-            },
-            {
-                "nombre": "Reporte 2", 
-                "descripcion": "Grupo de opwqpujpwie  ieqho hdas lkasdhl asdiowqhjeahnewh",
-                "fecha":"Fecha", 
-            },
-            {
-                "nombre": "Reporte 3", 
-                "descripcion": "iuowqhwequo wqj kas njajskhquoh kenrewujwerio er jweioh dm",
-                "fecha":"Fecha",
-            },
-            {
-                "nombre": "Reporte 4", 
-                "descripcion": "Grupo kjuwquie wqoiuh ewqo aslnwq8dh dqwoi a sdljkashnwoaish",
-                "fecha":"Fecha",
-            },
-        ]
-    }
-    render(){
+    const [state, setState] = useState({
+        reportesUsuario: []
+    })
+    const { auth } = useAuth();
+
+    useEffect( async () => {
+        const value = auth.userName;
+        console.log('Hola '+ value)
+        axios.post('http://192.168.1.6:5000/reportM/fetchReportMovil', {Usuario: value})
+        .then(response => {
+            console.log(response.data.result)
+            setState({
+                reportesUsuario: response.data.result
+            })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }, []);
+
     return (
         <View>
             { 
-            this.state.reportes.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
+            state.reportesUsuario.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
             (<ScrollView
                 horizontal= {false}
                 showsVerticalScrollIndicator={false}
                 style= {{height: 630}}
             >
                 {
-                    this.state.reportes.map((reportes, index) => (
+                    state.reportesUsuario.map((reportes, index) => (
                     <View key={index}>
                     <NativeBaseProvider>
                         <Center padding={2}>
@@ -60,19 +57,47 @@ class ReporteC extends Component {
                         <Pressable onPress={() => console.log("I'm Pressed")}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-                            {reportes.nombre} 
+                            {reportes.Asunto} 
                         </Text>
                         <Divider my={3}></Divider>
                         <HStack alignItems="center">
-                            <Badge colorScheme="darkBlue" width={100} _text={{
-                            color: "white"
-                            }} variant="solid" rounded="4">
-                            <Text color={"white"}>{reportes.fecha}</Text>
-                            </Badge>
+                            {
+                                reportes.Estado === 'N' ? (
+                                    <Badge colorScheme="danger" width={300} _text={{
+                                        color: "white"
+                                        }} variant="solid" rounded="4">
+                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte}</Text>
+                                    </Badge>
+                                ): (
+                                    console.log(' ')
+                                )
+                            }
+                            {
+                                reportes.Estado === 'P' ? (
+                                    <Badge colorScheme="warning" width={300} _text={{
+                                        color: "white"
+                                        }} variant="solid" rounded="4">
+                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte}</Text>
+                                    </Badge>
+                                ): (
+                                    console.log(' ')
+                                )
+                            }
+                            {
+                                reportes.Estado === 'F' ? (
+                                    <Badge colorScheme="success" width={300} _text={{
+                                        color: "white"
+                                        }} variant="solid" rounded="4">
+                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte}</Text>
+                                    </Badge>
+                                ): (
+                                    console.log(' ')
+                                )
+                            }
                             <Spacer />
                         </HStack>
                         <Text mt="2" fontSize="sm" color="coolGray.700">
-                            {reportes.descripcion}
+                            {reportes.Descripcion}
                         </Text>
                         </Box>
                         </Pressable>
@@ -87,6 +112,4 @@ class ReporteC extends Component {
         </View>
     )
 }
-}
 
-export default ReporteC

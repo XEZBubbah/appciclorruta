@@ -34,7 +34,7 @@ export default function EditarUsuario ({navigation}) {
             validateOnChange: false,
             onSubmit: async (formValue) => {
                 var userNameOld = auth.userName;
-                axios.post('http://192.168.1.6:5000/userM/modifyUserInfo', {...formValue, userNameOld})
+                axios.post('http://192.168.1.3:5000/userM/modifyUserInfo', {...formValue, userNameOld})
                 .then(function(response){
                     console.log(response.data.message);
                     onUpdate();

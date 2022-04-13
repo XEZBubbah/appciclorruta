@@ -35,7 +35,7 @@ export default function CrearReporteScreen ({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post('http://192.168.1.6:5000/reportM/createReport', {...formValue, Usuario})
+            axios.post('http://192.168.1.3:5000/reportM/createReport', {...formValue, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 salir();

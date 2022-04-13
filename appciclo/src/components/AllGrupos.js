@@ -22,7 +22,7 @@ export default function GrupoTodos() {
     })
 
     useEffect( async () => {
-        axios.post('http://192.168.1.6:5000/groupM/fetchGroupMov', )
+        axios.post('http://192.168.1.3:5000/groupM/fetchGroupMov', )
         .then(response => {
             console.log(response.data.result)
             setState({

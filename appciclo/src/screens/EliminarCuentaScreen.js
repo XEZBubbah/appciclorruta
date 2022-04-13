@@ -16,7 +16,7 @@ export default function EliminarCuenta ({navigation}){
     async function eliminar () {
         var value = auth.userName 
         console.log('Soy: '+ value)
-        axios.post('http://192.168.1.6:5000/userM/deleteUserAccount', {Usuario: value})
+        axios.post('http://192.168.1.3:5000/userM/deleteUserAccount', {Usuario: value})
         .then(response => {
             console.log(response.data);
             salir();

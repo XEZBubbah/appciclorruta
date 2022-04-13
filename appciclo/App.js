@@ -9,6 +9,7 @@ import PerfilScreen from './src/screens/PerfilScreen';
 import ItinerarioScreen from './src/screens/ItinerariosScreen';
 import CrearItinerarioScreen from './src/screens/CrearItinierarioScreen';
 import GrupoScreen from './src/screens/GrupoScreen';
+import ChooseLocation from './src/components/ChooseLocation';
 import CrearGrupoScreen from './src/screens/CrearGrupoScreen';
 import ReporteScreen from './src/screens/ReporteScreen';
 import CrearReporteScreen from './src/screens/CrearReporteScreen';
@@ -54,6 +55,10 @@ function App () {
             <Stack.Screen
               name="Map View"
               component={MapScreen}
+            />
+            <Stack.Screen
+              name="Ruta"
+              component={ChooseLocation}
             />
             <Stack.Screen
               name="Noticias"

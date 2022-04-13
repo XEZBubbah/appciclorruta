@@ -23,20 +23,7 @@ function CambioContraScreen({navigation}) {
                     <FormControl>
                     <Button
                         title="Confirmar Cambio"
-                        onPress={() => {
-                            Alert.alert(
-                                '¿Confirmar Cambio de Contraseña?',
-                                "",
-                                [
-                                    {
-                                        text: 'Cancelar',
-                                    },
-                                    {
-                                        text: 'Confirmar',
-                                        onPress: () => navigation.navigate('Login')
-                                    }
-                                ]
-                            )
+                        onPress={() => {    
                             
                         }
                         }

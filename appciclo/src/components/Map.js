@@ -15,24 +15,43 @@ export default function Map () {
     const navigation = useNavigation();
 
     const [state, setState] = useState({
+        initialValues: {
+            latitude: 7.126844, 
+            longitude: -73.118850,
+            longitudeDelta: 0.04,
+            latitudeDelta: 0.04,
+        },
         pickupCords: {
             latitude: 7.126844, 
             longitude: -73.118850,
-            latitudeDelta: 0.04,
-            longitudeDelta: 0.04
         },
         droplocationCords: {
-            latitude: 7.120971,
-            longitude: -73.116513,
-            latitudeDelta: 0.04,
-            longitudeDelta: 0.04
+            latitude: 7.126844, 
+            longitude: -73.118850,
         }
     })
 
     const mapRef = useRef()
     const { pickupCords, droplocationCords } = state
     const onPressLocation = () => {
-        navigation.navigate('Ruta')
+        navigation.navigate('Ruta', {getCordinates: fetchValues})
+    }
+
+    const fetchValues = (data) => {
+        setState({
+            pickupCords: {
+                latitude: data.pickupCords.latitude,
+                longitude: data.pickupCords.longitud,
+                longitudDelta: 0.04,
+                latitudeDelta: 0.04,
+            },
+            droplocationCords: {
+                latitude: data.destinationCords.latitude,
+                longitude: data.destinationCords.longitud,
+                longitudDelta: 0.04,
+                latitudeDelta: 0.04,
+            }
+        })
     }
 
     return (
@@ -42,7 +61,7 @@ export default function Map () {
             style= {styles.map}
             loadingEnabled = {true}
             kmlSrc = {Kml_File} 
-            initialRegion = {pickupCords}
+            initialRegion = {state.initialValues}
         > 
         <Marker 
             image={require('../imgs/cycling.png')}
@@ -56,7 +75,7 @@ export default function Map () {
                 destination={droplocationCords}
                 apikey={API_KEY_GOOGLE_MAPS}
                 strokeWidth= {3}
-                mode={"DRIVING"}
+                mode={"TRANSIT"}
                 strokeColor="green"
                 optimizeWaypoints= {true}
                 onReady={result =>{

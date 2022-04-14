@@ -40,7 +40,6 @@ export default function RecuperarContScreen({navigation}) {
         }       
     });
 
-
     return (
         <NativeBaseProvider>
             <Center w="100%">

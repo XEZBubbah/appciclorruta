@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogBox } from 'react-native'
+import { LogBox, Alert } from 'react-native'
 import { NativeBaseProvider, Text, Button, View, ScrollView } from "native-base";
 import { API_KEY_GOOGLE_MAPS } from '../store/GoogleMaps';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -44,12 +44,37 @@ const ChooseLocation = (props) => {
 
     const { pickupCords, destinationCords } = state
 
+    function asingError(){
+        Alert.alert(
+            'Tenemos un problema', 
+            'Tiene que llenar los campos vacios',
+            [
+                {text: 'Ok'}
+            ]
+        );
+    }
+
+    const check = () => {
+        if(Object.keys(pickupCords).length === 0){
+            return false
+        }
+        if(Object.keys(destinationCords).length === 0){
+            return false
+        }
+        return true
+    }
+
     const onDone = () => {
-        props.route.params.getCordinates({
-            pickupCords,
-            destinationCords
-        })
-        navigation.goBack()
+        const comp = check()
+        if(comp === true){
+            props.route.params.getCordinates({
+                pickupCords,
+                destinationCords
+            })
+            navigation.goBack()
+        }else{
+            asingError()
+        }
     }
 
     const fecthAddressInicio = (lat, lng) => {

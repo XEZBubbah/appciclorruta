@@ -2,6 +2,7 @@ import * as React from "react";
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Image ,Divider} from 'native-base'
 import { useState } from 'react'
 import { View } from "react-native";
+import { URL } from "../store/GoogleMaps";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useFormik }  from 'formik';
 import * as Yup from 'yup';
@@ -102,7 +103,7 @@ export default function CrearUsuaScreen ({navigation}) {
                 var birthDate = fecha;
                 console.log('Entre: ' +birthDate);
                 console.log(formValue);
-                axios.post('http://192.168.1.3:5000/userM/signupMov', {...formValue, birthDate})
+                axios.post(URL+':5000/userM/signupMov', {...formValue, birthDate})
                 .then(function(response){
                     console.log (response.data.message);
                     onSingup();

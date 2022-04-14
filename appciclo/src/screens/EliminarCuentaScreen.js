@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Center, NativeBaseProvider, Button, HStack} from 'native-base';
 import useAuth from "../hooks/useAuth";
+import { URL } from "../store/GoogleMaps";
 import axios from "axios";
 
 export default function EliminarCuenta ({navigation}){
@@ -16,7 +17,7 @@ export default function EliminarCuenta ({navigation}){
     async function eliminar () {
         var value = auth.userName 
         console.log('Soy: '+ value)
-        axios.post('http://192.168.1.3:5000/userM/deleteUserAccount', {Usuario: value})
+        axios.post(URL+':5000/userM/deleteUserAccount', {Usuario: value})
         .then(response => {
             console.log(response.data);
             salir();

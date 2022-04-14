@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, Center,Image, Divider, Link, NativeBaseProvider, Heading, ScrollView, Box} from 'native-base';
+import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import GrupoC from "../components/Grupo";
 import axios from "axios";
@@ -14,7 +15,7 @@ export default function  PerfilScreen ({navigation}) {
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post('http://192.168.1.3:5000/userM/fetchUserInfo', {Usuario: value})
+        axios.post(URL+':5000/userM/fetchUserInfo', {Usuario: value})
         .then(response => {
             console.log(response.data.result)
             setState({

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { URL } from "../store/GoogleMaps";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
 import useAuth from "../hooks/useAuth";
@@ -27,7 +28,7 @@ export default function ReporteC () {
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post('http://192.168.1.3:5000/reportM/fetchReportMovil', {Usuario: value})
+        axios.post(URL+':5000/reportM/fetchReportMovil', {Usuario: value})
         .then(response => {
             console.log(response.data.result)
             setState({

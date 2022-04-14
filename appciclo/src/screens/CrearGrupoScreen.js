@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import { Alert } from 'react-native';
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Radio, Stack, Text} from 'native-base';
+import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -34,7 +35,7 @@ export default function CrearGrupoScreen ({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post('http://192.168.1.6:5000/groupM/createGroupMov', {...formValue, Usuario})
+            axios.post(URL+':5000/groupM/createGroupMov', {...formValue, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 onGrupo();

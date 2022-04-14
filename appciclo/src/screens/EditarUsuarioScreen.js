@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert } from "react-native";
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, ScrollView, Stack, Checkbox, Text} from 'native-base';
 import { useFormik }  from 'formik';
+import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
@@ -34,7 +35,7 @@ export default function EditarUsuario ({navigation}) {
             validateOnChange: false,
             onSubmit: async (formValue) => {
                 var userNameOld = auth.userName;
-                axios.post('http://192.168.1.3:5000/userM/modifyUserInfo', {...formValue, userNameOld})
+                axios.post(URL+':5000/userM/modifyUserInfo', {...formValue, userNameOld})
                 .then(function(response){
                     console.log(response.data.message);
                     onUpdate();

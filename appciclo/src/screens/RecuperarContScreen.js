@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert } from "react-native";
+import { URL } from "../store/GoogleMaps";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
@@ -29,7 +30,7 @@ export default function RecuperarContScreen({navigation}) {
         validateOnChange: false,
         onSubmit: async (formValue) => {
             console.log(formValue);
-            axios.post('http://192.168.1.3:5000/userM/restorePassword', {...formValue})
+            axios.post(URL+':5000/userM/restorePassword', {...formValue})
             .then(function(response){
                 console.log (response.data.message);
                 onUpdate();

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import useAuth from "../hooks/useAuth";
+import { URL } from "../store/GoogleMaps";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
@@ -35,7 +36,7 @@ export default function CrearReporteScreen ({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post('http://192.168.1.3:5000/reportM/createReport', {...formValue, Usuario})
+            axios.post(URL+':5000/reportM/createReport', {...formValue, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 salir();

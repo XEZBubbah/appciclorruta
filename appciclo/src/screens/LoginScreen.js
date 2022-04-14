@@ -1,5 +1,6 @@
 import React , { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { URL } from "../store/GoogleMaps";
 import { Image, Alert } from "react-native";
 import { Button, NativeBaseProvider, Center,Heading, Box, VStack, FormControl, Input, Link, HStack, Text} from 'native-base'
 import { useFormik } from 'formik';
@@ -34,7 +35,7 @@ export default function LoginScreen ({navigation}) {
         onSubmit: async (formValue) => {
                 login(formValue);
                 console.log('Soy: '+formValue.userName);
-                axios.post('http://192.168.0.17:5000/userM/signinMov', {...formValue})
+                axios.post(URL+':5000/userM/signinMov', {...formValue})
                 .then(function(response){
                     console.log ("Datos enviados .. ");
                     onLogin();  

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Alert } from "react-native";
+import { URL } from "../store/GoogleMaps";
 import { NativeBaseProvider, Box, VStack, FormControl, Input, Center} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import { useFormik } from 'formik';
@@ -33,7 +34,7 @@ export default function CambioContraScreen({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post('http://192.168.1.3:5000/userM/changePassword', {...formValue, Usuario})
+            axios.post(URL+':5000/userM/changePassword', {...formValue, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 onUpdate();

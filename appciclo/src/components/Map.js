@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import MapView, { Marker } from 'react-native-maps';
 import { API_KEY_GOOGLE_MAPS } from '../store/GoogleMaps'
-import { StyleSheet, Dimensions, View, Text} from "react-native";
+import { StyleSheet, View, Text} from "react-native";
 import MapViewDirections from 'react-native-maps-directions';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";

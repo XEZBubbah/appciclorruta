@@ -27,7 +27,9 @@ export default function GrupoC (){
     const [state, setState] = useState({
         gruposUsuario: []
     })
-    const { auth } = useAuth();
+    const { auth, onGroup, group } = useAuth();
+
+    console.log(group)
 
     useEffect( async () => {
         const value = auth.userName;
@@ -59,7 +61,10 @@ export default function GrupoC (){
                     <NativeBaseProvider>
                         <Center padding={2}>
                         <Box alignItems="center">
-                        <Pressable onPress={() => navigation.navigate('Chat Grupo')}>
+                        <Pressable onPress={() =>{
+                            onGroup(gruposUsuario.Nombre_Grupo)
+                            navigation.navigate('Chat Grupo')
+                        }}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
                             {gruposUsuario.Nombre_Grupo} 

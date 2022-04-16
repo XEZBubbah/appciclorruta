@@ -9,3 +9,5 @@ export const fetchUserGroupMov = (formData) => API.post('/groupM/fetchUserGroupM
 export const fetchUserInfo = (formData) => API.post('/userM/fetchUserInfo', formData);
 export const modifyUserInfo = (formData) => API.post('/userM/modifyUserInfo', formData);
 export const deleteUser = (formData) => API.post('/userM/deleteUserAccount', formData);
+export const sendMessage = (formData) => API.post('/chatM/storeUserMessages', formData);
+export const loadMessage = (formData) => API.post('/chatM/fetchChatMessagest', formData);

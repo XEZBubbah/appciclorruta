@@ -11,3 +11,5 @@ export const modifyUserInfo = (formData) => API.post('/userM/modifyUserInfo', fo
 export const deleteUser = (formData) => API.post('/userM/deleteUserAccount', formData);
 export const sendMessage = (formData) => API.post('/chatM/storeUserMessages', formData);
 export const loadMessage = (formData) => API.post('/chatM/fetchChatMessagest', formData);
+export const vincularGrupo = (formData) => API.post('/groupM/vinculateToGroup', formData);
+export const eliminarGrupo = (formData) => API.post('/groupM/deleteUserGroup', formData);

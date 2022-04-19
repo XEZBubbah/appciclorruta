@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useLayoutEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -8,21 +8,34 @@ import axios from "axios";
 export default function ChatGrupo() {
     
     const [messages, setMessages] = useState([]);
-    const { auth, group } = useAuth();
+    const { auth, group, idUser } = useAuth();
+    const usuario = auth.userName;
 
-    useLayoutEffect(async () => {
+    useEffect(async () => {
       axios.post(URL+':5000/chatM/fetchChatMessages', {Grupo: group})
       .then(response => {
         console.log(response.data.result)
-        setMessages(response.data.result)
-        return response.data.result
+        let users = new Array();
+        let respon = response.data.result;
+        for(var user in Object.keys(respon)){
+          users.push({ 
+            _id: respon[user]._id,
+            text: respon[user].Mensaje,
+            createdAt: respon[user].Fecha_Creacion,
+            user: {
+              _id: respon[user].UAppMov_Id,
+              name: respon[user].UAppMov_Usuario,
+            }
+          });
+        }
+        setMessages(users)
       }).catch(error => {
-        return console.log(error)
+        console.log(error)
       })
-    })
+    }, [])
 
-    async function send (text) {
-      axios.post(URL+':5000/chatM/storeUserMessages', {Usuario: auth.userName, text: text, Grupo: group })
+    async function send (text, createdAt) {
+      axios.post(URL+':5000/chatM/storeUserMessages', {Usuario: auth.userName, text: text, Grupo: group, createdAt: createdAt })
       .then(response => {
         console.log(response.data.result)
       }).catch(error => {
@@ -33,18 +46,23 @@ export default function ChatGrupo() {
     const onSend = useCallback((messages = []) => {
       setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
       const {
+        createdAt = new Date(),
         text,
       } = messages[0]
-      send(text)
-    }, [])
+      console.log("Fecha: "+createdAt)
+      send(text, createdAt)
+    }, [messages])
 
     return(
       <GiftedChat
+        renderUsernameOnMessage= {true}
         messages={messages}
         showAvatarForEveryMessage= {true}
+        showUserAvatar= {true}
         onSend={messages => onSend(messages)}
         user={{
-          avatar: "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+          _id: idUser,
+          name: usuario,
         }}
       />
     )

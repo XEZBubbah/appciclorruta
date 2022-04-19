@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { URL } from "../store/GoogleMaps";
+import useAuth from "../hooks/useAuth";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
 import axios from "axios";
 
@@ -18,14 +20,18 @@ const styles = StyleSheet.create({
 
 export default function GrupoTodos() {  
 
+    const { onGroup, auth } = useAuth('');
+
     const [state, setState] = useState({
         grupos: []
     })
 
+    const navigation = useNavigation()
+
     useEffect( async () => {
-        axios.post(URL+':5000/groupM/fetchGroupMov', )
+        const value = auth.userName;
+        axios.post(URL+':5000/groupM/fetchGroupMov', {Usuario: value})
         .then(response => {
-            console.log(response.data.result)
             setState({
                 grupos: response.data.result
             })
@@ -50,7 +56,16 @@ export default function GrupoTodos() {
                     <NativeBaseProvider>
                         <Center padding={2}>
                         <Box alignItems="center">
-                        <Pressable onPress={() => console.log("I'm Pressed")}>
+                        
+                        <Pressable onPress={() => {
+                            if(grupos.Visibilidad === 'Publico'){
+                                onGroup(grupos.Nombre_Grupo)
+                                navigation.navigate("Publico")
+                            }else{
+                                onGroup(grupos.Nombre_Grupo)
+                                navigation.navigate("Privado")
+                            }
+                        }}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
                             {grupos.Nombre_Grupo} 

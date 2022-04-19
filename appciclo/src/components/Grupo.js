@@ -61,7 +61,15 @@ export default function GrupoC (){
                     <NativeBaseProvider>
                         <Center padding={2}>
                         <Box alignItems="center">
-                        <Pressable onPress={() =>{
+                        <Pressable 
+                        onLongPress={() => {
+                            onGroup({
+                                Visibilidad: gruposUsuario.Visibilidad,
+                                Nombre: gruposUsuario.Nombre_Grupo
+                            })
+                            navigation.navigate('Eliminar Grupo')
+                        }}
+                        onPress={() =>{
                             onGroup(gruposUsuario.Nombre_Grupo)
                             navigation.navigate('Chat Grupo')
                         }}>

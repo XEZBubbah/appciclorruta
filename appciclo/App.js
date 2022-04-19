@@ -12,9 +12,12 @@ import GrupoScreen from './src/screens/GrupoScreen';
 import ChooseLocation from './src/components/ChooseLocation';
 import CrearGrupoScreen from './src/screens/CrearGrupoScreen';
 import ReporteScreen from './src/screens/ReporteScreen';
+import IngresarGPrivado from './src/screens/IngresarGPrivado';
+import IngresarGPublico from './src/screens/IngresarGPublico';
 import CrearReporteScreen from './src/screens/CrearReporteScreen';
 import TimePicker from './src/components/TimePicker';
 import GruposScreen from './src/screens/GruposScreen';
+import EliminarGrupo from './src/screens/EliminarGrupo';
 import EliminarCuenta from './src/screens/EliminarCuentaScreen';
 import EditarUsuario from './src/screens/EditarUsuarioScreen';
 import ChatGrupo from './src/screens/ChatGrupoScreen';
@@ -81,12 +84,24 @@ function App () {
               component={CrearGrupoScreen}
             /> 
             <Stack.Screen
+              name="Eliminar Grupo"
+              component={EliminarGrupo}
+            /> 
+            <Stack.Screen
               name="Grupos"
               component={GruposScreen}
             />  
             <Stack.Screen
               name="Mis Grupos"
               component={GrupoScreen}
+            /> 
+            <Stack.Screen
+              name="Privado"
+              component={IngresarGPrivado}
+            /> 
+            <Stack.Screen
+              name="Publico"
+              component={IngresarGPublico}
             /> 
             <Stack.Screen
               name="Chat Grupo"

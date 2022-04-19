@@ -1,10 +1,25 @@
-import React from "react";
-import { ScrollView, Center, Divider, Button, NativeBaseProvider, Text} from 'native-base'
+import React, {useEffect}from "react";
+import { URL } from "../store/GoogleMaps";
+import { ScrollView, Center, Divider, Button, NativeBaseProvider} from 'native-base'
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 export default function  MenUsuarioScreen ({navigation}) {
 
-    const {auth, logout} = useAuth();
+    const {auth, logout, asingIdUser} = useAuth();
+    
+    useEffect( async () => {
+        const value = auth.userName;
+        console.log('Hola '+ value)
+        axios.post(URL+':5000/userM/fetchUserInfo', {Usuario: value})
+        .then(response => {
+            console.log("Id: "+response.data.result._id)
+            asingIdUser(response.data.result._id)
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }, []);
 
     return (
         <NativeBaseProvider>

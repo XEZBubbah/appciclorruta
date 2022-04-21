@@ -3,7 +3,7 @@ import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, Te
 import TimePicker from "../components/TimePicker";
 
 
-function CrearItinerarioScreen ({navigation}) {
+export default function CrearItinerarioScreen ({navigation}) {
 
     return (
         <NativeBaseProvider>
@@ -23,6 +23,14 @@ function CrearItinerarioScreen ({navigation}) {
                     <TimePicker></TimePicker>
                 </FormControl>
                 <FormControl>
+                    <FormControl.Label>Punto partida</FormControl.Label>
+                    
+                </FormControl>
+                <FormControl>
+                    <FormControl.Label>Punto llegada</FormControl.Label>
+                    
+                </FormControl>
+                <FormControl>
                     <FormControl.Label>Descripción</FormControl.Label>
                     <TextArea h={150} placeholder="Descrición del Itinerario" width={275} />
                 </FormControl>
@@ -35,6 +43,3 @@ function CrearItinerarioScreen ({navigation}) {
         </NativeBaseProvider>
     )
 }
-
-
-export default  CrearItinerarioScreen

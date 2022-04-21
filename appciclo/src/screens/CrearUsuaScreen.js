@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Link, HStack, Text, Center, ScrollView, Image ,Divider} from 'native-base'
 import { useState } from 'react'
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { URL } from "../store/GoogleMaps";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useFormik }  from 'formik';
@@ -10,6 +10,7 @@ import axios from "axios";
 import * as ImagePicker from 'expo-image-picker';
 
 let fecha = "";
+var uri = '';
 
 function DatePickerComp() {
 
@@ -74,10 +75,12 @@ export default function CrearUsuaScreen ({navigation}) {
         quality: 1,
       });
   
-      console.log(result);
+      console.log('result:'+result);
+      uri = result.uri;
   
       if (!result.cancelled) {
         setImage(result.uri);
+        console.log('Img: '+image);
       }
     };
     
@@ -103,9 +106,10 @@ export default function CrearUsuaScreen ({navigation}) {
                 var birthDate = fecha;
                 console.log('Entre: ' +birthDate);
                 console.log(formValue);
-                axios.post(URL+':5000/userM/signupMov', {...formValue, birthDate})
+                console.log('Uri: '+uri)
+                axios.post(URL+':5000/userM/signupMov', {...formValue, birthDate, avatar: uri})
                 .then(function(response){
-                    console.log (response.data.message);
+                    console.log ('salida '+response.data.message);
                     onSingup();
                 }).catch(function(e){
                     var err = Object.values(e.response.data)[0];

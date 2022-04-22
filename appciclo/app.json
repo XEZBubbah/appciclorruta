@@ -16,9 +16,6 @@
     "assetBundlePatterns": [
       "assets/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "package": "com.proyecto.bikeapp",
       "versionCode": 1,

@@ -11,7 +11,7 @@ export default function  MenUsuarioScreen ({navigation}) {
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post(URL+':5000/userM/fetchUserInfo', {Usuario: value})
+        axios.post(URL+'/userM/fetchUserInfo', {Usuario: value})
         .then(response => {
             console.log("Id: "+response.data.result._id)
             asingIdUser(response.data.result._id)
@@ -37,11 +37,6 @@ export default function  MenUsuarioScreen ({navigation}) {
                 <Divider my={3} />
                 <Button 
                     size={"lg"} 
-                    onPress={() => navigation.navigate('Itinerarios')}
-                > Itinerarios </Button>
-                <Divider my={3} />
-                <Button 
-                    size={"lg"} 
                     onPress={() => navigation.navigate('Grupos')}    
                 > Grupos </Button>
                 <Divider my={3} />
@@ -52,7 +47,7 @@ export default function  MenUsuarioScreen ({navigation}) {
                 <Divider my={3} />
                 <Button 
                     size={"lg"} 
-                    onPress={() => navigation.navigate('Map View')}    
+                    onPress={() => navigation.navigate('Map Cicloruta')}    
                 > Mapa Ciclorruta </Button>
                 <Divider my={3} />
                 <Button 

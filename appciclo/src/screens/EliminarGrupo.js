@@ -32,7 +32,7 @@ export default function EliminarGrupo({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post(URL+':5000/groupM/deleteUserGroup', {...formValue, Nombre_Grupo: group.Nombre , Usuario})
+            axios.post(URL+'/groupM/deleteUserGroup', {...formValue, Nombre_Grupo: group.Nombre , Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 onUpdate();

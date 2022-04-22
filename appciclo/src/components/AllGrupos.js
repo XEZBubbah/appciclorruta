@@ -30,7 +30,7 @@ export default function GrupoTodos() {
 
     useEffect( async () => {
         const value = auth.userName;
-        axios.post(URL+':5000/groupM/fetchGroupMov', {Usuario: value})
+        axios.post(URL+'/groupM/fetchGroupMov', {Usuario: value})
         .then(response => {
             setState({
                 grupos: response.data.result

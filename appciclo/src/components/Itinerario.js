@@ -1,82 +1,71 @@
-import React, {Component} from "react";
+import React, { useState, useEffect } from "react";
 import { View, ActivityIndicator, ScrollView, StyleSheet} from "react-native";
 import { Box, Text, Center, Divider, NativeBaseProvider, Pressable, HStack, Badge, Spacer} from 'native-base';
+import { URL } from "../store/GoogleMaps";
+import { useNavigation } from "@react-navigation/native";
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 10,
-      justifyContent: "center"
-    },
-    horizontal: {
-      flexDirection: "row",
-      padding: 5
-    }
-});
+export default function ItinerarioC() {
 
-class ItinerarioC extends Component {
+    const navigation = useNavigation();
+    const { auth, group, onItinerario } = useAuth();
+    const [state, setState] = useState({
+        itinerarios: []
+    })
 
-    state = {
-        itinerarios: [
-            {
-            "nombre": "Salida Casual", 
-            "descripcion": "Salida jashnbkjdasbskadjbdaskjbdaskjbaskdsbbsakasbkasjbd",
-            "horaPartida":"10:00 a.m", 
-            "horaLlegada": "11:00 a.m",
-            },
-            {
-                "nombre": "Ruta Trabajo", 
-                "descripcion": "Salida jashnbkjdasbskadjbdaskjbdaskjbaskdsbbsakasbkasjbd",
-                "horaPartida":"9:00 a.m", 
-                "horaLlegada": "10:00 a.m",
-            },
-            {
-                "nombre": "Amigos Route", 
-                "descripcion": "Salida jashnbkjdasbskadjbdaskjbdaskjbaskdsbbsakasbkasjbd",
-                "horaPartida":"12:00 a.m", 
-                "horaLlegada": "1:00 p.m",
-            },
-            {
-                "nombre": "Ejercicio", 
-                "descripcion": "Salida jashnbkjdasbskadjbdaskjbdaskjbaskdsbbsakasbkasjbd",
-                "horaPartida":"8:00 p.m", 
-                "horaLlegada": "9:00 p.m",
-            },
-        ]
-    }
-    render(){
+    useEffect( async () => {
+        const value = auth.userName;
+        console.log('Hola '+ value)
+        axios.post(URL+'/itineraryM/getUserItineraries', {Usuario: value, Grupo: group})
+        .then(response => {
+            console.log(response.data.result)
+            setState({
+                itinerarios: response.data.result
+            })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }, []);
+
     return (
         <View>
             { 
-            this.state.itinerarios.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
+            state.itinerarios.length === 0 ? <ActivityIndicator color="black" size="large" style={[styles.container, styles.horizontal]} />:
             (<ScrollView
                 horizontal= {false}
                 showsVerticalScrollIndicator={false}
-                style= {{height: 630}}
+                style= {{height: 600}}
             >
                 {
-                    this.state.itinerarios.map((itinerarios, index) => (
+                    state.itinerarios.map((itinerarios, index) => (
                     <View key={index}>
                     <NativeBaseProvider>
                         <Center padding={2}>
                         <Box alignItems="center">
-                        <Pressable onPress={() => console.log("I'm Pressed")}>
+                        <Pressable 
+                            onLongPress={() => {
+                                onItinerario(itinerarios.Nombre_Itinerario)
+                                navigation.navigate('Eliminar Itinerario')
+                            }}
+                            onPress={() => console.log("I'm Pressed")}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-                            {itinerarios.nombre} 
+                            {itinerarios.Nombre_Itinerario} 
                         </Text>
                         <Divider my={3}></Divider>
                         <HStack alignItems="center">
                             <Badge colorScheme="darkBlue" width={170} _text={{
                             color: "white"
                             }} variant="solid" rounded="4">
-                            <Text color={"white"}>{itinerarios.horaPartida} - {itinerarios.horaLlegada}</Text>
+                            <Text color={"white"}>{itinerarios.Hora_Salida} - {itinerarios.Hora_Llegada}</Text>
                             </Badge>
                             <Spacer />
                         </HStack>
                         <Text mt="2" fontSize="sm" color="coolGray.700">
-                            {itinerarios.descripcion}
+                            {itinerarios.Descripcion}
                         </Text>
                         </Box>
                         </Pressable>
@@ -91,6 +80,15 @@ class ItinerarioC extends Component {
         </View>
     )
 }
-}
 
-export default ItinerarioC
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 10,
+      justifyContent: "center"
+    },
+    horizontal: {
+      flexDirection: "row",
+      padding: 5
+    }
+});

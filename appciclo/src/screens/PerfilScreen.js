@@ -1,6 +1,7 @@
 import React, { useEffect, useState, } from "react";
 import { Text, Center,Image, Divider, Link, NativeBaseProvider, Heading, ScrollView, Box} from 'native-base';
 import { URL } from "../store/GoogleMaps";
+import ItinerarioC from "../components/Itinerario";
 import useAuth from "../hooks/useAuth";
 import GrupoC from "../components/Grupo";
 import axios from "axios";
@@ -18,7 +19,7 @@ export default function  PerfilScreen ({navigation}) {
     const [ imgUrl, setImgUrl ] = useState('');
 
     async function fetchImg(value){
-        axios.post(URL+':5000/userM/fetchUserAvatar', {Usuario: value})
+        axios.post(URL+'/userM/fetchUserAvatar', {Usuario: value})
         .then(response =>{
             setImgUrl('data:image/jpg;base64,'+response.data.result.Avatar)
             console.log('Hola '+imgUrl)
@@ -30,7 +31,7 @@ export default function  PerfilScreen ({navigation}) {
     useEffect( async () => {
         const value = auth.userName;
         fetchImg(value);
-        axios.post(URL+':5000/userM/fetchUserInfo', {Usuario: value})
+        axios.post(URL+'/userM/fetchUserInfo', {Usuario: value})
         .then(response => {
             setState({
                 infoUsuario: response.data.result
@@ -89,7 +90,7 @@ export default function  PerfilScreen ({navigation}) {
             </Center>
         </Box>
         <ScrollView h={230}>
-            <GrupoC></GrupoC>
+            <ItinerarioC/>
         </ScrollView>
         </Center>
         </NativeBaseProvider>

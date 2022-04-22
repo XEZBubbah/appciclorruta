@@ -28,7 +28,7 @@ export default function ReporteC () {
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post(URL+':5000/reportM/fetchReportMovil', {Usuario: value})
+        axios.post(URL+'/reportM/fetchReportMovil', {Usuario: value})
         .then(response => {
             console.log(response.data.result)
             setState({

@@ -35,14 +35,12 @@ export default function LoginScreen ({navigation}) {
         onSubmit: async (formValue) => {
                 login(formValue);
                 console.log('Soy: '+formValue.userName);
-                axios.post(URL+':5000/userM/signinMov', {...formValue})
+                axios.post(URL+'/userM/signinMov', {...formValue})
                 .then(function(response){
                     console.log ("Datos enviados .. ");
                     onLogin();  
                 }).catch(function(error){
                     var err = Object.values(error.response.data)[0];
-                    console.log(err);
-                    console.log(typeof err);
                     asingError(err);
                 });
 

@@ -35,7 +35,7 @@ export default function CrearGrupoScreen ({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post(URL+':5000/groupM/createGroupMov', {...formValue, Usuario})
+            axios.post(URL+'/groupM/createGroupMov', {...formValue, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 onGrupo();

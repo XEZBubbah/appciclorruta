@@ -14,12 +14,14 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.proyecto.bikeapp",
+      "versionCode": 1,
       "config": {
         "googleMaps":{
           "apiKey": "AIzaSyCsf_YKixoXBs0IR1Wa-B0brbJ5NqkW3yY"

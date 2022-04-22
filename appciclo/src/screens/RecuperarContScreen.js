@@ -30,7 +30,7 @@ export default function RecuperarContScreen({navigation}) {
         validateOnChange: false,
         onSubmit: async (formValue) => {
             console.log(formValue);
-            axios.post(URL+':5000/userM/restorePassword', {...formValue})
+            axios.post(URL+'/userM/restorePassword', {...formValue})
             .then(function(response){
                 console.log (response.data.message);
                 onUpdate();

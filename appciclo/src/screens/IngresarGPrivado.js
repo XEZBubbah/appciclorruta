@@ -34,7 +34,7 @@ export default function IngresarGPrivado({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post(URL+':5000/groupM/vinculateToGroup', {...formValue, Nombre_Grupo: group, Usuario})
+            axios.post(URL+'/groupM/vinculateToGroup', {...formValue, Nombre_Grupo: group, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 onUpdate();

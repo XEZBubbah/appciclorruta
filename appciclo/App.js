@@ -1,4 +1,5 @@
 import MapScreen from './src/screens/MapScreen';
+import MapCicloRuta from './src/components/MapView';
 import LoginScreen from './src/screens/LoginScreen';
 import CrearUsuaScreen from './src/screens/CrearUsuaScreen';
 import RecuperarContScreen from './src/screens/RecuperarContScreen';
@@ -21,6 +22,7 @@ import EliminarGrupo from './src/screens/EliminarGrupo';
 import EliminarCuenta from './src/screens/EliminarCuentaScreen';
 import EditarUsuario from './src/screens/EditarUsuarioScreen';
 import ChatGrupo from './src/screens/ChatGrupoScreen';
+import EliminarItinerario from './src/screens/EliminarItinerario';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -30,7 +32,7 @@ import { AuthProvider } from './src/context/AuthContext';
 
 const Stack = createStackNavigator();
 
-function App () {
+export default function App () {
     return (
         <NavigationContainer>
           <AuthProvider>
@@ -60,6 +62,10 @@ function App () {
               component={MapScreen}
             />
             <Stack.Screen
+              name="Map Cicloruta"
+              component={MapCicloRuta}
+            />
+            <Stack.Screen
               name="Ruta"
               component={ChooseLocation}
             />
@@ -86,6 +92,10 @@ function App () {
             <Stack.Screen
               name="Eliminar Grupo"
               component={EliminarGrupo}
+            /> 
+            <Stack.Screen
+              name="Eliminar Itinerario"
+              component={EliminarItinerario}
             /> 
             <Stack.Screen
               name="Grupos"
@@ -127,13 +137,11 @@ function App () {
               name="Editar Cuenta"
               component={EditarUsuario}
             /> 
-
           </Stack.Navigator>
           </AuthProvider>
         </NavigationContainer>
     );
 }
 
-export default App
 
 

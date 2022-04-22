@@ -34,7 +34,7 @@ export default function CambioContraScreen({navigation}) {
             const Usuario = auth.userName;
             console.log(formValue);
             console.log('Soy '+ Usuario);
-            axios.post(URL+':5000/userM/changePassword', {...formValue, Usuario})
+            axios.post(URL+'/userM/changePassword', {...formValue, Usuario})
             .then(function(response){
                 console.log (response.data.message);
                 onUpdate();

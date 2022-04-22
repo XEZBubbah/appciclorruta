@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-import { LogBox, Alert } from 'react-native'
+import { LogBox, Alert } from 'react-native';
+import useAuth from "../hooks/useAuth";
 import { NativeBaseProvider, Text, Button, View, ScrollView } from "native-base";
 import { API_KEY_GOOGLE_MAPS } from '../store/GoogleMaps';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from "@react-navigation/native";
 
-
 const Ruta = ({
     placeholderText,
     fecthAddress
 }) => {
-
     const onPressAdress = (data , details) => {
         const lat = details.geometry.location.lat
         const lng = details.geometry.location.lng
         fecthAddress(lat, lng)
     }
-
     return(
         <View>
             <GooglePlacesAutocomplete
@@ -34,6 +32,8 @@ const Ruta = ({
 }
 
 const ChooseLocation = (props) => {
+
+    const { putFinal, putInicio } = useAuth();
 
     const navigation = useNavigation();
 
@@ -71,7 +71,9 @@ const ChooseLocation = (props) => {
                 pickupCords,
                 destinationCords
             })
-            navigation.goBack()
+            putInicio(pickupCords)
+            putFinal(destinationCords)
+            navigation.navigate('Map View')
         }else{
             asingError()
         }
@@ -83,8 +85,9 @@ const ChooseLocation = (props) => {
                 latitude: lat,
                 longitud: lng
             }
-        })  
+        })
     }
+
     const fecthAddressFin = (lat, lng) => {
         setState({
             ...state, destinationCords:{

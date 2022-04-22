@@ -107,7 +107,7 @@ export default function CrearUsuaScreen ({navigation}) {
                 console.log('Entre: ' +birthDate);
                 console.log(formValue);
                 console.log('Uri: '+uri)
-                axios.post(URL+':5000/userM/signupMov', {...formValue, birthDate, avatar: uri})
+                axios.post(URL+'/userM/signupMov', {...formValue, birthDate, avatar: uri})
                 .then(function(response){
                     console.log ('salida '+response.data.message);
                     onSingup();
@@ -116,7 +116,7 @@ export default function CrearUsuaScreen ({navigation}) {
                     asingError(err);
                 })
             }
-        });
+    });
 
     return (
        

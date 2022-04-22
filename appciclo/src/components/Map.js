@@ -18,8 +18,8 @@ export default function Map () {
         initialValues: {
             latitude: 7.126844, 
             longitude: -73.118850,
-            longitudeDelta: 0.04,
-            latitudeDelta: 0.04,
+            longitudeDelta: 0.007,
+            latitudeDelta: 0.007,
         },
         pickupCords: {
             latitude: 7.126844, 

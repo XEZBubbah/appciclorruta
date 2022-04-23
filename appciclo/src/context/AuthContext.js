@@ -7,6 +7,9 @@ export const AuthContext = createContext({
     itinerario: undefined,
     inicio: undefined,
     final: undefined,
+    imgUser: undefined,
+    puntoi: undefined,
+    puntol: undefined,
     login: () => {},
     logout: () => {},
     onGroup: () => {},
@@ -18,6 +21,10 @@ export const AuthContext = createContext({
     deleteInicio: () => {},
     putFinal: () => {},
     deleteFinal: () => {},
+    putImgUser: () => {},
+    deleteImgUser: () => {},
+    putI: () => {},
+    putL: () => {},
 });
 
 export function AuthProvider(pros){
@@ -28,6 +35,9 @@ export function AuthProvider(pros){
     const [itinerario, setItinerario] = useState(undefined);
     const [inicio, setInicio] = useState(undefined);
     const [final, setFinal] = useState(undefined);
+    const [imgUser, setImgUser] = useState(undefined);
+    const [puntoi, setPuntoI] = useState(undefined);
+    const [puntol, setPuntoL] = useState(undefined);
 
     const login = (userData) => {
         setAuth(userData);
@@ -63,6 +73,18 @@ export function AuthProvider(pros){
     const deleteFinal = () => {
         setFinal(undefined);
     };
+    const putImgUser = (groupData) => {
+        setImgUser(groupData);
+    };
+    const deleteImgUser = () => {
+        setImgUser(undefined);
+    };
+    const putI = (groupData) => {
+        setPuntoI(groupData);
+    };
+    const putL = (groupData) => {
+        setPuntoL(groupData);
+    };
 
     const valeContext = {
         auth,
@@ -71,6 +93,9 @@ export function AuthProvider(pros){
         itinerario,
         inicio,
         final,
+        imgUser,
+        puntoi,
+        puntol,
         login,
         logout,
         onGroup,
@@ -81,7 +106,11 @@ export function AuthProvider(pros){
         putInicio,
         deleteInicio,
         putFinal,
-        deleteFinal
+        deleteFinal,
+        putImgUser,
+        deleteImgUser,
+        putI,
+        putL
     };
 
     return(

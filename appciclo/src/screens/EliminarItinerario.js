@@ -1,4 +1,5 @@
 import React from "react";
+import { Alert } from "react-native";
 import { Text, Center, NativeBaseProvider, Button, HStack} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import { URL } from "../store/GoogleMaps";
@@ -16,6 +17,16 @@ export default function EliminarItinerario (){
         navigation.navigate('Mis Grupos')
     }
 
+    function asingError(err){
+        Alert.alert(
+            'Tenemos un problema', 
+            `${err}`,
+            [
+                {text: 'Ok'}
+            ]
+        );
+    }
+
     async function eliminar () {
         var value = auth.userName 
         console.log('Soy: '+ value)
@@ -24,8 +35,10 @@ export default function EliminarItinerario (){
             console.log(response.data);
             salir();
         })
-        .catch(error => {
-            console.log(error);
+        .catch(e => {
+            var err = Object.values(e.response.data)[0];
+            console.log(err);
+            asingError(err);
         })
     }
 

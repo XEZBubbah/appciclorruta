@@ -6,8 +6,6 @@ import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-
-
 export default function EditarUsuario ({navigation}) {
     
         const { auth,logout } = useAuth();

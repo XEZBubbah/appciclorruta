@@ -1,17 +1,17 @@
 import React from "react";
 import { View, Button, Text } from "react-native";
-import ItinerariosAll from "../components/ItinerariosAll";
+import ItinerarioC from "../components/Itinerario";
 
-export default function  ItinerarioAllScreen ({navigation}) {
+function  ItinerarioScreen ({navigation}) {
 
     return (
     <View style={{padding: 12}}>
-        <ItinerariosAll />
+        <ItinerarioC></ItinerarioC>
         <View style={{padding:30}}>
                 <Button 
-                    title="Mis Itinerarios"
+                    title="Crear Itinerario"
                     e-round={10}
-                    onPress={() => navigation.navigate('Mis Itinerarios')}
+                    onPress={() => navigation.navigate('Crear Itinerario')}
                 />
                 <Text style={{fontSize:8}}/>
                 <Button 
@@ -23,3 +23,5 @@ export default function  ItinerarioAllScreen ({navigation}) {
     </View>
     )
 }
+
+export default ItinerarioScreen

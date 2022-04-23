@@ -79,7 +79,7 @@ export default function CrearItinerarioScreen () {
                 )}
             </View>
         );
-      }
+    }
 
     
     const send = () => {

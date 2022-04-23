@@ -7,7 +7,7 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
 
-export default function ItinerarioC() {
+export default function ItinerariosAll() {
 
     const navigation = useNavigation();
     const { auth, group, onItinerario } = useAuth();
@@ -18,7 +18,7 @@ export default function ItinerarioC() {
     useEffect( async () => {
         const value = auth.userName;
         console.log('Hola '+ value)
-        axios.post(URL+'/itineraryM/getUserItineraries', {Usuario: value, Grupo: group})
+        axios.post(URL+'/itineraryM/getGroupItineraries', {Usuario: value ,Grupo: group})
         .then(response => {
             console.log(response.data.result)
             setState({
@@ -46,13 +46,9 @@ export default function ItinerarioC() {
                         <Center padding={2}>
                         <Box alignItems="center">
                         <Pressable 
-                            onLongPress={() => {
+                            onPress={() => {
                                 onItinerario(itinerarios.Nombre_Itinerario)
-                                navigation.navigate('Eliminar Itinerario')
-                            }}
-                            onPress={() => {    
-                                onItinerario(itinerarios.Nombre_Itinerario)
-                                navigation.navigate('Ver Itinerario')
+                                navigation.navigate('Vincular Itinerario')
                             }}>
                         <Box width="340" borderWidth="1" borderColor="coolGray.300" shadow="3" bg="coolGray.100" p="5" rounded="8">
                         <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">

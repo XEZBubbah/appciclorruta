@@ -43,7 +43,7 @@ export default function  MenUsuarioScreen ({navigation}) {
                 <Button 
                     size={"lg"} 
                     onPress={() => navigation.navigate('Reportes')} 
-                > Reportes </Button>
+                > Reporte de Errores </Button>
                 <Divider my={3} />
                 <Button 
                     size={"lg"} 

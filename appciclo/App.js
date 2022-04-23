@@ -1,13 +1,15 @@
 import MapScreen from './src/screens/MapScreen';
 import MapCicloRuta from './src/components/MapView';
 import LoginScreen from './src/screens/LoginScreen';
+import EditarIitinerario from './src/screens/EditarItinerarioScreen';
 import CrearUsuaScreen from './src/screens/CrearUsuaScreen';
 import RecuperarContScreen from './src/screens/RecuperarContScreen';
 import CambioContraScreen from './src/screens/CambioContraScreen';
 import NoticiasScreen from './src/screens/NoticiasScreen';
 import MenUsuarioScreen from './src/screens/MenUsuarioScreen';
 import PerfilScreen from './src/screens/PerfilScreen';
-import ItinerarioScreen from './src/screens/ItinerariosScreen';
+import ItinerarioAllScreen from './src/screens/ItinerariosScreen';
+import ItinerarioScreen from './src/screens/MisItinerariosScreen';
 import CrearItinerarioScreen from './src/screens/CrearItinierarioScreen';
 import GrupoScreen from './src/screens/GrupoScreen';
 import ChooseLocation from './src/components/ChooseLocation';
@@ -23,6 +25,9 @@ import EliminarCuenta from './src/screens/EliminarCuentaScreen';
 import EditarUsuario from './src/screens/EditarUsuarioScreen';
 import ChatGrupo from './src/screens/ChatGrupoScreen';
 import EliminarItinerario from './src/screens/EliminarItinerario';
+import VincularItinerario from './src/screens/VincularItinerario';
+import VerItinerarioScreen from './src/screens/VerItinerarioScreen';
+import MapItinerario from './src/components/MapItinerario';
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -78,8 +83,24 @@ export default function App () {
               component={PerfilScreen}
             /> 
             <Stack.Screen
-              name="Itinerarios"
+              name="Mis Itinerarios"
               component={ItinerarioScreen}
+            />
+            <Stack.Screen
+              name="Itinerarios"
+              component={ItinerarioAllScreen}
+            />
+            <Stack.Screen
+              name="Editar Itinerario"
+              component={EditarIitinerario}
+            />
+            <Stack.Screen
+              name="Vincular Itinerario"
+              component={VincularItinerario}
+            />
+            <Stack.Screen
+              name="Ver Itinerario"
+              component={VerItinerarioScreen}
             />
             <Stack.Screen
               name="Crear Itinerario"
@@ -136,6 +157,10 @@ export default function App () {
             <Stack.Screen
               name="Editar Cuenta"
               component={EditarUsuario}
+            /> 
+            <Stack.Screen
+              name="Ruta Itinerario"
+              component={MapItinerario}
             /> 
           </Stack.Navigator>
           </AuthProvider>

@@ -19,4 +19,6 @@ export const getItinerarios = (formData) => API.post('/itineraryM/getUserItinera
 export const getUserItinerario = (formData) => API.post('/itineraryM/getUserItinerary', formData);
 export const crearItinerario = (formData) => API.post('/itineraryM/createItinerary', formData);
 export const eliminarItinerario = (formData) => API.post('/itineraryM/deleteItinerary', formData);
-
+export const vincularItinerario = (formData) => API.post('/itineraryM/vinculateToItinerary', formData);
+export const verItinerarios = (formData) => API.post('/itineraryM/getGroupItineraries', formData);
+export const editarItinerario = (formData) => API.post('/itineraryM/editItinerary', formData);

@@ -3,9 +3,9 @@ import MapView from 'react-native-maps';
 import { StyleSheet, View, Dimensions} from "react-native";
 
 const Kml_File = 'https://pastebin.com/raw/203B9ixP'
-const height = Dimensions.get("window").height
+const height = 450
 
-export default function MapCicloRuta () {
+export default function MapCicloRutaItinerario () {
 
     const [state, setState] = useState({
         initialValues: {

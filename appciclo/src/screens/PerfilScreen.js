@@ -78,16 +78,8 @@ export default function  PerfilScreen ({navigation}) {
                 <Heading size='md'>Grupos</Heading>
             </Center>
         </Box>
-        <ScrollView h={230}>
+        <ScrollView h={430}>
             <GrupoC></GrupoC>
-        </ScrollView>
-        <Box backgroundColor={"blue.300"} w={340}>
-            <Center>
-                <Heading size='md'>Itinerarios</Heading>
-            </Center>
-        </Box>
-        <ScrollView h={230}>
-            <ItinerarioC/>
         </ScrollView>
         </Center>
         </NativeBaseProvider>

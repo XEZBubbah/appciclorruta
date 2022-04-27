@@ -22,3 +22,4 @@ export const eliminarItinerario = (formData) => API.post('/itineraryM/deleteItin
 export const vincularItinerario = (formData) => API.post('/itineraryM/vinculateToItinerary', formData);
 export const verItinerarios = (formData) => API.post('/itineraryM/getGroupItineraries', formData);
 export const editarItinerario = (formData) => API.post('/itineraryM/editItinerary', formData);
+export const fecthImg = (formData) => API.post('/userM/signupAvatar', formData);

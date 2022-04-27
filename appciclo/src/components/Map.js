@@ -32,7 +32,7 @@ export default function Map () {
     })
 
     const mapRef = useRef()
-    const { pickupCords, droplocationCords } = state
+    const { pickupCords, droplocationCords, time, distance } = state
     const onPressLocation = () => {
         navigation.navigate('Ruta', {getCordinates: fetchValues})
     }
@@ -50,12 +50,26 @@ export default function Map () {
                 longitude: data.destinationCords.longitud,
                 longitudDelta: 0.04,
                 latitudeDelta: 0.04,
-            }
+            },
+            time: 0,
+            distance: 0,
         })
+    }
+
+    const fetchTime = (d , t) => {
+        setState(state => ({ ...state, distance: d, time: t }))
     }
 
     return (
     <View>
+        <View>
+            {distance !== 0 && time !== 0 &&(
+                <View style={{alignItems: 'center', marginVertical: 16}}>
+                    <Text>Tiempo Estimado: {time}</Text>
+                    <Text>Distancia Estimada: {distance} </Text>
+                </View>
+            )}
+        </View>
         <MapView
             ref={mapRef}
             style= {styles.map}

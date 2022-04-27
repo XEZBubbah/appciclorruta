@@ -15,7 +15,7 @@ export default function CrearReporteScreen ({navigation}) {
     const [value, setValue] = useState('');
 
     function salir(){
-        navigation.navigate('Reportes');
+        navigation.navigate('Menú Usuario');
     }
 
     function asingError(err){

@@ -12,7 +12,7 @@ export default function  PerfilScreen ({navigation}) {
     const [state, setState] = useState({
         infoUsuario: []
     })
-    const { auth, putImgUser, imgUser } = useAuth();
+    const { auth } = useAuth();
 
     function asingError(err){
         Alert.alert(
@@ -23,23 +23,9 @@ export default function  PerfilScreen ({navigation}) {
             ]
         );
     }
-
-    async function fetchImg(value){
-        axios.post(URL+'/userM/fetchUserAvatar', {Usuario: value})
-        .then(response =>{
-            putImgUser('data:image/png;base64,'+response.data.result.Avatar)
-            console.log('Hola '+imgUser)
-        }).catch(e =>{
-            console.log('Soy de IMG...')
-            var err = Object.values(e.response.data)[0];
-            console.log(err);
-            asingError(err);
-        })
-    }
     
     useEffect( async () => {
         const value = auth.userName;
-        fetchImg(value);
         axios.post(URL+'/userM/fetchUserInfo', {Usuario: value})
         .then(response => {
             setState({
@@ -58,8 +44,8 @@ export default function  PerfilScreen ({navigation}) {
         <NativeBaseProvider>
         <Center style={{padding: 30}}>
         <Image size={100} resizeMode={"contain"} borderRadius={250} source={{
-            uri: imgUser
-            }} alt="Alternate Text" />
+            uri: 'https://wallpaperaccess.com/full/1672521.jpg'
+            }} alt="Foto Perfil" />
         <Heading size={"lg"}> {state.infoUsuario.Nombre} {state.infoUsuario.Apellido} </Heading>
         <Text> {state.infoUsuario.Correo} </Text>
         <Link _text={{

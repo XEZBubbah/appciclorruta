@@ -67,7 +67,7 @@ export default function ReporteC () {
                                     <Badge colorScheme="danger" width={300} _text={{
                                         color: "white"
                                         }} variant="solid" rounded="4">
-                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte}</Text>
+                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte+" - "+" No revisado"}</Text>
                                     </Badge>
                                 ): (
                                     console.log(' ')
@@ -78,7 +78,7 @@ export default function ReporteC () {
                                     <Badge colorScheme="warning" width={300} _text={{
                                         color: "white"
                                         }} variant="solid" rounded="4">
-                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte}</Text>
+                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte+" - "+" En Proceso"}</Text>
                                     </Badge>
                                 ): (
                                     console.log(' ')
@@ -89,7 +89,7 @@ export default function ReporteC () {
                                     <Badge colorScheme="success" width={300} _text={{
                                         color: "white"
                                         }} variant="solid" rounded="4">
-                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte}</Text>
+                                        <Text color={"white"}>{reportes.Fecha_Generado.substring(0,10)+" - "+reportes.Tipo_Reporte+" - "+" Solucionado"}</Text>
                                     </Badge>
                                 ): (
                                     console.log(' ')

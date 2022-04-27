@@ -8,9 +8,10 @@ import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 import * as ImagePicker from 'expo-image-picker';
+import { fecthImg } from "../api";
 
 let fecha = "";
-var uri = '';
+const formData = new FormData();
 
 function DatePickerComp() {
 
@@ -44,7 +45,7 @@ function DatePickerComp() {
     return (
       <View>
         <Button onPress = {showDatepicker}> Selecciona una fecha </Button> 
-        <Text style={{alignSelf:"center"}}> {text}</Text>
+        <Text style={{alignSelf:"center"}}> {text} </Text>
         {
         show && 
         (
@@ -64,29 +65,44 @@ function DatePickerComp() {
 
 export default function CrearUsuaScreen ({navigation}) {
 
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState();
 
     const pickImage = async () => {
       // No permissions request is necessary for launching the image library
       let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
       });
   
-      console.log('result:'+result);
-      uri = result.uri;
+      console.log('result:'+JSON.stringify(result));
   
       if (!result.cancelled) {
-        setImage(result.uri);
-        console.log('Img: '+image);
+        setImage(result.uri)
+        formData.append('avatar', {
+            uri: result.uri,
+            type: "image/jpg",
+            name: 'User.jpg'
+        })
       }
     };
     
     const onSingup = () => {
         navigation.navigate('Login')
     };
+
+    async function fetchImgen (formData) {
+        await fetch(URL+'/userM/signupAvatar', {
+            method:'post',
+            body:formData,
+            headers: { "Content-Type": "multipart/form-data" },
+        }).then(function(response){
+            console.log(response.data);
+        }).catch(function(e){
+            console.log(e);
+        })
+    }
 
     function asingError(err){
         Alert.alert(
@@ -105,14 +121,20 @@ export default function CrearUsuaScreen ({navigation}) {
             onSubmit: async (formValue) => {
                 var birthDate = fecha;
                 console.log('Entre: ' +birthDate);
-                console.log(formValue);
-                console.log('Uri: '+uri)
-                axios.post(URL+'/userM/signupMov', {...formValue, birthDate, avatar: uri})
-                .then(function(response){
-                    console.log ('salida '+response.data.message);
+                formValue.birthDate = birthDate;
+                console.log("Soy formData: " + JSON.stringify(formValue));
+                axios.post(URL+'/userM/signupMov', { ...formValue })
+                .then(function(response) {
+                    console.log(response.data);
+                    console.log("FormData: "+JSON.stringify(formData));
+                    //formData.append('Usuario' ,formValue.userName);
+                    //formData.append('Correo' ,formValue.email);
+                    fetchImgen(formData);
                     onSingup();
-                }).catch(function(e){
+                })
+                .catch(e => {
                     var err = Object.values(e.response.data)[0];
+                    console.log(err);
                     asingError(err);
                 })
             }
@@ -225,6 +247,7 @@ function initialValues(){
         phone: "",
         email: "", 
         password: "",
+        birthDate: "",
     }
 }
 

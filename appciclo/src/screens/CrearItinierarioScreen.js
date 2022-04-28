@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Button, NativeBaseProvider, Box, VStack, FormControl, Input, Center, TextArea, Text} from 'native-base';
 import { View , Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
@@ -9,11 +8,10 @@ import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function CrearItinerarioScreen () {
+
+export default function CrearItinerarioScreen ({navigation}) {
 
     const { auth, group, inicio, final } = useAuth();
-
-    const navigation = useNavigation()
 
     const [ state, setState ] = useState({
         hora_Llegada: "",

@@ -8,10 +8,8 @@ import { useFormik }  from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 import * as ImagePicker from 'expo-image-picker';
-import { fecthImg } from "../api";
 
 let fecha = "";
-const formData = new FormData();
 
 function DatePickerComp() {
 
@@ -80,29 +78,12 @@ export default function CrearUsuaScreen ({navigation}) {
   
       if (!result.cancelled) {
         setImage(result.uri)
-        formData.append('avatar', {
-            uri: result.uri,
-            type: "image/jpg",
-            name: 'User.jpg'
-        })
       }
     };
     
     const onSingup = () => {
         navigation.navigate('Login')
     };
-
-    async function fetchImgen (formData) {
-        await fetch(URL+'/userM/signupAvatar', {
-            method:'post',
-            body:formData,
-            headers: { "Content-Type": "multipart/form-data" },
-        }).then(function(response){
-            console.log(response.data);
-        }).catch(function(e){
-            console.log(e);
-        })
-    }
 
     function asingError(err){
         Alert.alert(
@@ -126,10 +107,6 @@ export default function CrearUsuaScreen ({navigation}) {
                 axios.post(URL+'/userM/signupMov', { ...formValue })
                 .then(function(response) {
                     console.log(response.data);
-                    console.log("FormData: "+JSON.stringify(formData));
-                    //formData.append('Usuario' ,formValue.userName);
-                    //formData.append('Correo' ,formValue.email);
-                    fetchImgen(formData);
                     onSingup();
                 })
                 .catch(e => {

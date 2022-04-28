@@ -26,7 +26,7 @@ export default function GrupoTodos() {
         grupos: []
     })
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     useEffect( async () => {
         const value = auth.userName;

@@ -1,4 +1,5 @@
 import MapScreen from './src/screens/MapScreen';
+import GrupoTodos from './src/components/AllGrupos';
 import MapCicloRuta from './src/components/MapView';
 import LoginScreen from './src/screens/LoginScreen';
 import EditarIitinerario from './src/screens/EditarItinerarioScreen';
@@ -28,7 +29,6 @@ import EliminarItinerario from './src/screens/EliminarItinerario';
 import VincularItinerario from './src/screens/VincularItinerario';
 import VerItinerarioScreen from './src/screens/VerItinerarioScreen';
 import MapItinerario from './src/components/MapItinerario';
-import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -45,6 +45,10 @@ export default function App () {
             <Stack.Screen
               name="Login"
               component={LoginScreen}
+            />
+            <Stack.Screen
+              name="Grupos General"
+              component={GrupoTodos}
             />
             <Stack.Screen
               name="Crear Usuario"

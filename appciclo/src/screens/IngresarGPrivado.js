@@ -23,7 +23,7 @@ export default function IngresarGPrivado({navigation}) {
 
     const onUpdate = () => {
         outGroup();
-        navigation.navigate('Grupos')
+        navigation.navigate('Menú Usuario')
     }
 
     const formik = useFormik({

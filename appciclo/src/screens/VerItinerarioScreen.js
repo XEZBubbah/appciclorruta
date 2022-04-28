@@ -1,16 +1,13 @@
 import React , { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { URL } from "../store/GoogleMaps";
-import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
 import MapCicloRutaItinerario from "../components/MapCiclo";
 import { Button, NativeBaseProvider, Center, Heading, Box, VStack, Divider, Badge, Text, View} from 'native-base'
 import axios from "axios";
 
 
-export default function VerItinerarioScreen () {
-
-    const navigation = useNavigation();
+export default function VerItinerarioScreen ({ navigation }) {
 
     const { auth, group, itinerario, putI, putL } = useAuth();
 
@@ -48,9 +45,6 @@ export default function VerItinerarioScreen () {
         );
     }
     
-    const onEditar = () => {
-        navigation.navigate('Menú Usuario')
-    };
 
     return (
         <NativeBaseProvider>

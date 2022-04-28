@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
 export default function GrupoC (){  
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     const [state, setState] = useState({
         gruposUsuario: []

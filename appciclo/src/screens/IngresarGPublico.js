@@ -1,16 +1,13 @@
 import React from "react";
 import { URL } from "../store/GoogleMaps";
 import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { NativeBaseProvider, Center, Text, HStack, Button} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-export default function IngresarGPublico() {
+export default function IngresarGPublico({navigation}) {
 
     const {auth, outGroup, group} = useAuth();
-
-    const navigation = useNavigation()
 
     function asingError(err){
         Alert.alert(
@@ -24,7 +21,7 @@ export default function IngresarGPublico() {
 
     const onUpdate = () => {
         outGroup();
-        navigation.navigate("Grupos");
+        navigation.navigate("Menú Usuario");
     }
 
     async function enviar() {

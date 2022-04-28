@@ -62,14 +62,6 @@ export default function Map () {
 
     return (
     <View>
-        <View>
-            {distance !== 0 && time !== 0 &&(
-                <View style={{alignItems: 'center', marginVertical: 16}}>
-                    <Text>Tiempo Estimado: {time}</Text>
-                    <Text>Distancia Estimada: {distance} </Text>
-                </View>
-            )}
-        </View>
         <MapView
             ref={mapRef}
             style= {styles.map}

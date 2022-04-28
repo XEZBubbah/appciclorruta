@@ -8,15 +8,13 @@ import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-export default function EditarIitinerario () {
+export default function EditarIitinerario ({navigation}) {
     
         const { auth, group, inicio, final, itinerario } = useAuth();
         const [ checkName, setcheckName ] = useState(false);
         const [ checkHorario, setcheckHorario ] = useState(false);
         const [ checkDescripcion, setcheckDescripcion  ] = useState(false);
         const [ checkRuta, setcheckRuta  ] = useState(false);
-
-        const navigation = useNavigation();
 
         const [ state, setState ] = useState({
             hora_Llegada: "",

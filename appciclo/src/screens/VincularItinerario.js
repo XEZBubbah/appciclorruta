@@ -1,16 +1,13 @@
 import React from "react";
 import { URL } from "../store/GoogleMaps";
 import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { NativeBaseProvider, Center, Text, HStack, Button} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
-export default function VincularItinerario() {
+export default function VincularItinerario( {navigation} ) {
 
     const {auth, itinerario, group} = useAuth();
-
-    const navigation = useNavigation()
     console.log(group)
 
     function asingError(err){

@@ -4,12 +4,10 @@ import { Text, Center, NativeBaseProvider, Button, HStack} from 'native-base';
 import useAuth from "../hooks/useAuth";
 import { URL } from "../store/GoogleMaps";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
 
 
-export default function EliminarItinerario (){
+export default function EliminarItinerario ({ navigation }){
 
-    const navigation = useNavigation();
     const { auth, itinerario, group} = useAuth('');
 
     function salir() {

@@ -108,6 +108,7 @@ export default function MapItinerario() {
                     key={index} 
                     image={require('../imgs/alerta.png')}
                     title= {alerta.Nombre_Alerta}
+                    
                     description= {alerta.Descripcion}
                     coordinate={{
                         latitude: alerta.latitude,

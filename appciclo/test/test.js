@@ -17,7 +17,8 @@ import PerfilScreen from '../src/screens/PerfilScreen';
 import RecuperarContScreen from '../src/screens/RecuperarContScreen';
 import ReporteScreen from '../src/screens/ReporteScreen';
 import VerItinerarioScreen from '../src/screens/VerItinerarioScreen';
-import VincularItinerario from '../src/screens/VincularItinerario';;
+import VincularItinerario from '../src/screens/VincularItinerario';
+import CrearAlerta from '../src/screens/CrearAlerta';
 
 let componentLogin;
 let componentCambioContraScreen;
@@ -37,6 +38,7 @@ let componentRecuperarContScreen;
 let componentReporteScreen;
 let componentVerItinerarioScreen;
 let componentVincularItinerario;
+let componentCrearAlerta;
 
 describe("Render de las app", () => {
     beforeEach(() => {
@@ -58,6 +60,7 @@ describe("Render de las app", () => {
         componentReporteScreen = render(<ReporteScreen />);
         componentVerItinerarioScreen = render(<VerItinerarioScreen />);
         componentVincularItinerario = render(<VincularItinerario />);
+        componentCrearAlerta = render(<CrearAlerta />)
     });
     it('Renderizado Login', () => {
         expect(componentLogin).toBeDefined();
@@ -112,5 +115,8 @@ describe("Render de las app", () => {
     });
     it('Renderizado Vincular Itinerario', () => {
         expect(componentVincularItinerario).toBeDefined();
+    });
+    it('Renderizado Crear Alerta', () => {
+        expect(componentCrearAlerta).toBeDefined();
     });
 });

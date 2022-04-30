@@ -27,6 +27,7 @@ import EditarUsuario from './src/screens/EditarUsuarioScreen';
 import ChatGrupo from './src/screens/ChatGrupoScreen';
 import EliminarItinerario from './src/screens/EliminarItinerario';
 import VincularItinerario from './src/screens/VincularItinerario';
+import CrearAlerta from './src/screens/CrearAlerta';
 import VerItinerarioScreen from './src/screens/VerItinerarioScreen';
 import MapItinerario from './src/components/MapItinerario';
 import React from 'react';
@@ -165,6 +166,10 @@ export default function App () {
             <Stack.Screen
               name="Ruta Itinerario"
               component={MapItinerario}
+            /> 
+            <Stack.Screen
+              name="Crear Alerta"
+              component={CrearAlerta}
             /> 
           </Stack.Navigator>
           </AuthProvider>

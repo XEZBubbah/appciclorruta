@@ -68,7 +68,7 @@ export default function VerItinerarioScreen ({ navigation }) {
                 _text={{
                 color: "white"
                 }} variant="solid" rounded="4">
-                <Text color={"white"}> {state.infoItinerario.Hora_Salida} - {state.infoItinerario.Hora_Llegada} </Text>
+                <Text color={"white"} > {state.infoItinerario.Hora_Salida} - {state.infoItinerario.Hora_Llegada} </Text>
             </Badge>
             <Text fontSize={5}></Text>
             <Divider bg="indigo.500" thickness="2" orientation="horizontal" />

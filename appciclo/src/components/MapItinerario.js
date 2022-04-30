@@ -3,10 +3,12 @@ import MapView, { Marker } from 'react-native-maps';
 import { API_KEY_GOOGLE_MAPS } from '../store/GoogleMaps'
 import MapViewDirections from 'react-native-maps-directions';
 import { NativeBaseProvider,View, Button, Box } from 'native-base';
+import axios from "axios";
+import { URL } from "../store/GoogleMaps";
 import useAuth from "../hooks/useAuth";
-import * as Permissions from 'expo-permissions';
+import { useNavigation } from "@react-navigation/native";
 import * as Location from 'expo-location'
-import { StyleSheet, Dimensions, Alert } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 
 const Kml_File = 'https://pastebin.com/raw/203B9ixP'
 const height = 640;
@@ -19,7 +21,8 @@ const styles = StyleSheet.create({
 
 export default function MapItinerario() {
 
-    const { puntoi, puntol } = useAuth();  
+    const navigation = useNavigation();
+    const { puntoi, puntol, putUbicaUsu } = useAuth();  
     const [initialValues, setInitialValues ] = useState(null);
     const [marketUsuario, setMarketUsuario] = useState(false);
     console.log("Inicio "+ JSON.stringify(initialValues));
@@ -29,6 +32,9 @@ export default function MapItinerario() {
     const [ubiUsuario, setUbiUsuario] = useState(
         { latitude: 7.126844, longitude: -73.118850, longitudeDelta: 0.04, latitudeDelta: 0.04 }
     );
+    const [state, setState] = useState({
+        alertas: []
+    })
 
     const getLocationUser = async() => {
         const res = {status: false, location: null}
@@ -47,16 +53,33 @@ export default function MapItinerario() {
         res.status = true
         res.location = location
         setUbiUsuario(res.location);
+        putUbicaUsu(res.location);
         return res
+    }
+    function cAlerta(){
+        getLocationUser();
+        navigation.navigate('Crear Alerta');
     }
     function inciarRuta(){
         getLocationUser();
         setMarketUsuario(true);
     }
-
+    async function fecthAlert() {
+        axios.get(URL+'/alertaM/fetchAlerts', )
+        .then(response => {
+            console.log(response.data.result)
+            setState({
+                alertas: response.data.result
+            })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
     useEffect(() =>{
         console.log("Soy UbiUsuario "+ JSON.stringify(ubiUsuario));
         setInitialValues(ubiUsuario);
+        fecthAlert();
     }, [ubiUsuario])
 
     return (
@@ -78,6 +101,20 @@ export default function MapItinerario() {
             ) : (
                 console.log('Hola :)')
             )
+        }
+        {
+            state.alertas.map((alerta, index) => (
+                <Marker
+                    key={index} 
+                    image={require('../imgs/alerta.png')}
+                    title= {alerta.Nombre_Alerta}
+                    description= {alerta.Descripcion}
+                    coordinate={{
+                        latitude: alerta.latitude,
+                        longitude: alerta.longitude, 
+                    }}
+                />
+            ))
         }
         <Marker 
             image={require('../imgs/cycling.png')}
@@ -111,7 +148,7 @@ export default function MapItinerario() {
                 <Button onPress={inciarRuta}>Iniciar Ruta</Button>
             </Box>
             <Box paddingTop={3}>
-                <Button>Enviar Alerta</Button>
+                <Button onPress={cAlerta}>Enviar Alerta</Button>
             </Box>
         </View>
     </View>

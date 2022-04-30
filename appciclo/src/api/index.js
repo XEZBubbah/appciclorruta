@@ -23,3 +23,5 @@ export const vincularItinerario = (formData) => API.post('/itineraryM/vinculateT
 export const verItinerarios = (formData) => API.post('/itineraryM/getGroupItineraries', formData);
 export const editarItinerario = (formData) => API.post('/itineraryM/editItinerary', formData);
 export const fecthImg = (formData) => API.post('/userM/signupAvatar', formData);
+export const crearAlerta = (formData) => API.post('/alertaM/setAlert', formData);
+export const fecthAlerta = (formData) => API.get('/alertaM/fetchAlerts', formData);

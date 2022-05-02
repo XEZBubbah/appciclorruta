@@ -10,6 +10,7 @@ export default function ChatGrupo() {
     const [messages, setMessages] = useState([]);
     const { auth, group, idUser } = useAuth();
     const usuario = auth.userName;
+    const [ enviado, setEnviado ] = useState(false);
 
     useEffect(async () => {
       axios.post(URL+'/chatM/fetchChatMessages', {Grupo: group})
@@ -32,12 +33,13 @@ export default function ChatGrupo() {
       }).catch(error => {
         console.log(error)
       })
-    }, [])
+    }, [enviado])
 
     async function send (text, createdAt) {
       axios.post(URL+'/chatM/storeUserMessages', {Usuario: auth.userName, text: text, Grupo: group, createdAt: createdAt })
       .then(response => {
         console.log(response.data.result)
+        setEnviado(!enviado)
       }).catch(error => {
         console.log(error);
       })

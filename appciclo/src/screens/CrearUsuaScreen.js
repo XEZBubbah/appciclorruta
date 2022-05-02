@@ -62,24 +62,6 @@ function DatePickerComp() {
 };
 
 export default function CrearUsuaScreen ({navigation}) {
-
-    const [image, setImage] = useState();
-
-    const pickImage = async () => {
-      // No permissions request is necessary for launching the image library
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-  
-      console.log('result:'+JSON.stringify(result));
-  
-      if (!result.cancelled) {
-        setImage(result.uri)
-      }
-    };
     
     const onSingup = () => {
         navigation.navigate('Login')
@@ -178,14 +160,6 @@ export default function CrearUsuaScreen ({navigation}) {
                         value={formik.values.password}
                         onChangeText={(text) => formik.setFieldValue("password", text)}    
                     />
-                </FormControl>
-                <Divider my={3}/>
-                <FormControl>
-                    <Button onPress={pickImage} > Imagen de Perfil </Button>
-                    <Divider my={3}/>
-                    <Center>
-                        {image && <Image alt="fotoPerfil" source={{ uri: image }} style={{ width: 200, height: 200, borderRadius: 20 }} />}
-                    </Center>
                 </FormControl>
 
                 <Button mt="2" colorScheme="indigo" onPress={() => 

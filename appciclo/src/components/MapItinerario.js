@@ -76,11 +76,11 @@ export default function MapItinerario() {
             console.log(error);
         })
     }
-    useEffect(() =>{
+    useEffect(() => {
         console.log("Soy UbiUsuario "+ JSON.stringify(ubiUsuario));
         setInitialValues(ubiUsuario);
         fecthAlert();
-    }, [ubiUsuario])
+    }, [ubiUsuario, state.alertas])
 
     return (
     <NativeBaseProvider>

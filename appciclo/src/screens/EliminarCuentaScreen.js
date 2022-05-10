@@ -29,8 +29,13 @@ export default function EliminarCuenta ({navigation}){
 
     return(
         <NativeBaseProvider>
-            <Center>
-                <Text p={10}>¿Seguro que desea eliminar su cuenta?</Text>
+            <Center padding={5}>
+                <Text p={4} fontSize= {16} bold={true}>¿Seguro que desea eliminar su cuenta?</Text>
+                <Text p={3} fontSize= {14} textAlign={'justify'}>Si deseas eliminar tu cuenta, recuerda que no vas a poder acceder a los servicios
+                    que ofrece BikeApp y que todos los datos relacionados a la cuenta (grupos, itinerarios) seran eliminados
+                    del sistema.
+                </Text>
+                <Text />
                 <HStack>
                     <Button marginRight={5}  onPress={() => {
                         eliminar()
